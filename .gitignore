@@ -12,3 +12,4 @@
 *.out
 /api_caller_test.go
 /.idea
+/api_auth_caller_test.go
