@@ -60,3 +60,27 @@ func TestSendWorkLinkNotice(t *testing.T) {
 	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
 	t.Logf(json.ToJson(resp))
 }
+
+func TestGetWorkNoticeProgressAndResultAndRecall(t *testing.T) {
+	accessToken, agentId, userIdList := GetTestInfo()
+
+	t.Log(userIdList)
+	//Text msg
+	msg := WorkNoticeMsg{
+		MsgType: "text",
+		Text: &TextNotice{
+			"我是本组织的提醒喝水小助手，记得喝水4~",
+		},
+	}
+	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
+	t.Logf(json.ToJson(resp))
+
+	progressResp, _ := GetWorkNoticeProgress(accessToken, agentId, resp.TaskId)
+	t.Logf(json.ToJson(progressResp))
+
+	resultResp, _ := GetWorkNoticeSendResult(accessToken, agentId, resp.TaskId)
+	t.Logf(json.ToJson(resultResp))
+
+	recallResp, _ := RecallWorkNotice(accessToken, agentId, resp.TaskId)
+	t.Logf(json.ToJson(recallResp))
+}

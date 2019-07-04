@@ -1,5 +1,10 @@
 package dingding_sdk_golang
 
+type WorkNoticeRecallResp struct {
+	ErrCode int    `json:"errcode"`
+	ErrMsg  string `json:"errmsg"`
+}
+
 type WorkNoticeMsg struct {
 	MsgType    string            `json:"msgtype"`
 	Text       *TextNotice       `json:"text"`
@@ -16,6 +21,32 @@ type SendWorkNoticeResp struct {
 	ErrCode int    `json:"errcode"`
 	ErrMsg  string `json:"errmsg"`
 	TaskId  int    `json:"task_id"`
+}
+
+type GetWorkNoticeProgressResp struct {
+	ErrCode  int            `json:"errcode"`
+	ErrMsg   string         `json:"errmsg"`
+	Progress NoticeProgress `json:"progress"`
+}
+
+type GetWorkNoticeResultResp struct {
+	ErrCode    int              `json:"errcode"`
+	ErrMsg     string           `json:"errmsg"`
+	SendResult NoticeSendResult `json:"send_result"`
+}
+
+type NoticeSendResult struct {
+	InvalidUserIdList   []string `json:"invalid_user_id_list"`
+	ForbiddenUserIdList []string `json:"forbidden_user_id_list"`
+	FailedUserIdList    []string `json:"failed_user_id_list"`
+	ReadUserIdList      []string `json:"read_user_id_list"`
+	UnreadUserIdList    []string `json:"unread_user_id_list"`
+	InvalidDeptIdList   []string `json:"invalid_dept_id_list"`
+}
+
+type NoticeProgress struct {
+	ProgressInPercent int `json:"progress_in_percent"`
+	Status            int `json:"status"`
 }
 
 type TextNotice struct {
