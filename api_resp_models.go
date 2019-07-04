@@ -1,5 +1,6 @@
 package dingding_sdk_golang
 
+//======================== 获取企业凭证: https://open-doc.dingtalk.com/microapp/serverapi3/vfitg0
 type GetCorpTokenResp struct {
 	ErrCode     int    `json:"errcode"`
 	ErrMsg      string `json:"errmsg"`
@@ -7,6 +8,7 @@ type GetCorpTokenResp struct {
 	ExpiresIn   int    `json:"expires_in"`
 }
 
+//======================== 获取企业授权信息: https://open-doc.dingtalk.com/microapp/serverapi3/hv357q
 type GetAuthInfoResp struct {
 	AuthCorpInfo    AuthCorpInfo    `json:"auth_corp_info"`
 	AuthUserInfo    AuthUserInfo    `json:"auth_user_info"`
@@ -57,4 +59,15 @@ type ChannelAgent struct {
 	AgentId   int    `json:"agentid"`
 	AppId     int    `json:"appid"`
 	LogoUrl   int    `json:"logo_url"`
+}
+
+//======================== 获取授权应用信息: https://open-doc.dingtalk.com/microapp/serverapi3/vfitg0
+type GetAgentResp struct {
+	AgentId     int    `json:"agentid"`
+	Name        string `json:"name"`
+	LogoUrl     string `json:"logo_url"`
+	Description string `json:"description"`
+	Close       int    `json:"close"`
+	ErrCode     int    `json:"errcode"`
+	ErrMsg      string `json:"errmsg"`
 }
