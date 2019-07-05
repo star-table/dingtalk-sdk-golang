@@ -5,7 +5,7 @@ type BaseResp struct {
 	ErrMsg  string `json:"errmsg"`
 }
 
-type GetDepMemberResp struct {
+type GetDepMemberIdsResp struct {
 	BaseResp
 
 	UserIds []string `json:"userIds"`
@@ -14,6 +14,17 @@ type GetDepMemberResp struct {
 type GetUserDetailResp struct {
 	BaseResp
 
+	UserList
+}
+
+type GetDepMemberListResp struct {
+	BaseResp
+
+	HasMore  bool       `json:"hasMore"`
+	UserList []UserList `json:"userlist"`
+}
+
+type UserList struct {
 	Name            string           `json:"name"`
 	UnionId         string           `json:"unionid"`
 	UserId          string           `json:"userid"`
