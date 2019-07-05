@@ -5,7 +5,7 @@ type BaseResp struct {
 	ErrMsg  string `json:"errmsg"`
 }
 
-type GetDepMemberResp struct {
+type GetDepMemberIdsResp struct {
 	BaseResp
 
 	UserIds []string `json:"userIds"`
@@ -14,6 +14,53 @@ type GetDepMemberResp struct {
 type GetUserDetailResp struct {
 	BaseResp
 
+	UserList
+}
+
+type GetDepMemberListResp struct {
+	BaseResp
+
+	HasMore  bool       `json:"hasMore"`
+	UserList []UserList `json:"userlist"`
+}
+
+type GetAdminListResp struct {
+	BaseResp
+
+	AdminList []AdminList `json:"admin_list"`
+}
+
+type GetAdminScopeResp struct {
+	BaseResp
+
+	DeptIds []int `json:"dept_ids"`
+}
+
+type CanAccessMicroAppResp struct {
+	BaseResp
+
+	CanAccess bool `json:"canAccess"`
+}
+
+type GetUserIdByUnionIdResp struct {
+	BaseResp
+
+	ContactType int    `json:"contactType"`
+	UserId      string `json:"userid"`
+}
+
+type GetOrgUserCountResp struct {
+	BaseResp
+
+	Count int64 `json:"count"`
+}
+
+type AdminList struct {
+	SysLevel int    `json:"sys_level"`
+	UserId   string `json:"userid"`
+}
+
+type UserList struct {
 	Name            string           `json:"name"`
 	UnionId         string           `json:"unionid"`
 	UserId          string           `json:"userid"`

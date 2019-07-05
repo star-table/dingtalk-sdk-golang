@@ -8,7 +8,7 @@ import (
 
 func GetTestInfo() (string, *DingTalkClient) {
 	client := CreateClient()
-	memberList, _ := client.GetDepMember("1")
+	memberList, _ := client.GetDepMemberIds("1")
 	userIdList := strings.Join(memberList.UserIds, ",")
 	return userIdList, client
 }

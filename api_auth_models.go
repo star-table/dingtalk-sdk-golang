@@ -46,7 +46,7 @@ type Agent struct {
 	AgentName string   `json:"agent_name"`
 	AgentId   int      `json:"agentid"`
 	AppId     int      `json:"appid"`
-	LogoUrl   int      `json:"logo_url"`
+	LogoUrl   string   `json:"logo_url"`
 	AdminList []string `json:"admin_list"`
 }
 
