@@ -6,34 +6,29 @@ import (
 	"testing"
 )
 
-func GetTestInfo() (string, int, string) {
-	corpTokenInfo, _ := GetCorpToken(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID)
-	accessToken := corpTokenInfo.AccessToken
-
-	corpAuthInfo, _ := GetAuthInfo(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID)
-	agentId := corpAuthInfo.AuthInfo.Agent[0].AgentId
-
-	memberList, _ := GetDepMember(accessToken, "1")
+func GetTestInfo() (string, *DingTalkClient) {
+	client := CreateClient()
+	memberList, _ := client.GetDepMember("1")
 	userIdList := strings.Join(memberList.UserIds, ",")
-	return accessToken, agentId, userIdList
+	return userIdList, client
 }
 
 func TestSendWorkTextNotice(t *testing.T) {
-	accessToken, agentId, userIdList := GetTestInfo()
+	userIdList, client := GetTestInfo()
 	//Text msg
 	msg := WorkNoticeMsg{
 		MsgType: "text",
 		Text: &TextNotice{
-			"我是本组织的提醒喝水小助手，记得喝水~",
+			"我是本组织的提醒喝水小助手，记得喝水8~",
 		},
 	}
-	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
+	resp, _ := client.SendWorkNotice(&userIdList, nil, false, msg)
 	t.Logf(json.ToJson(resp))
 }
 
 func TestSendWorkImageNotice(t *testing.T) {
-	accessToken, agentId, userIdList := GetTestInfo()
-	mediaResp, _ := UploadMedia(accessToken, "image", "C:\\Users\\admin\\Desktop\\dingding-test.jpg")
+	userIdList, client := GetTestInfo()
+	mediaResp, _ := client.UploadMedia("image", "C:\\Users\\admin\\Desktop\\dingding-test.jpg")
 	//Image msg
 	msg := WorkNoticeMsg{
 		MsgType: "image",
@@ -41,13 +36,13 @@ func TestSendWorkImageNotice(t *testing.T) {
 			MediaId: mediaResp.MediaId,
 		},
 	}
-	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
+	resp, _ := client.SendWorkNotice(&userIdList, nil, false, msg)
 	t.Logf(json.ToJson(resp))
 }
 
 func TestSendWorkLinkNotice(t *testing.T) {
-	accessToken, agentId, userIdList := GetTestInfo()
-	mediaResp, _ := UploadMedia(accessToken, "image", "C:\\Users\\admin\\Desktop\\dingding-test.jpg")
+	userIdList, client := GetTestInfo()
+	mediaResp, _ := client.UploadMedia("image", "C:\\Users\\admin\\Desktop\\dingding-test.jpg")
 	msg := WorkNoticeMsg{
 		MsgType: "link",
 		Link: &LinkNotice{
@@ -57,12 +52,12 @@ func TestSendWorkLinkNotice(t *testing.T) {
 			Text:   "该喝水了",
 		},
 	}
-	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
+	resp, _ := client.SendWorkNotice(&userIdList, nil, false, msg)
 	t.Logf(json.ToJson(resp))
 }
 
 func TestGetWorkNoticeProgressAndResultAndRecall(t *testing.T) {
-	accessToken, agentId, userIdList := GetTestInfo()
+	userIdList, client := GetTestInfo()
 
 	t.Log(userIdList)
 	//Text msg
@@ -72,15 +67,15 @@ func TestGetWorkNoticeProgressAndResultAndRecall(t *testing.T) {
 			"我是本组织的提醒喝水小助手，记得喝水4~",
 		},
 	}
-	resp, _ := SendWorkNotice(accessToken, agentId, &userIdList, nil, false, msg)
+	resp, _ := client.SendWorkNotice(&userIdList, nil, false, msg)
 	t.Logf(json.ToJson(resp))
 
-	progressResp, _ := GetWorkNoticeProgress(accessToken, agentId, resp.TaskId)
+	progressResp, _ := client.GetWorkNoticeProgress(resp.TaskId)
 	t.Logf(json.ToJson(progressResp))
 
-	resultResp, _ := GetWorkNoticeSendResult(accessToken, agentId, resp.TaskId)
+	resultResp, _ := client.GetWorkNoticeSendResult(resp.TaskId)
 	t.Logf(json.ToJson(resultResp))
 
-	recallResp, _ := RecallWorkNotice(accessToken, agentId, resp.TaskId)
+	recallResp, _ := client.RecallWorkNotice(resp.TaskId)
 	t.Logf(json.ToJson(recallResp))
 }

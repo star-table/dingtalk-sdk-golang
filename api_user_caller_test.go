@@ -7,9 +7,14 @@ import (
 
 func TestGetDepMember(t *testing.T) {
 
-	corpTokenInfo, _ := GetCorpToken(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID)
-	accessToken := corpTokenInfo.AccessToken
-
-	memberList, _ := GetDepMember(accessToken, "1")
+	memberList, _ := CreateClient().GetDepMember("1")
 	t.Logf(json.ToJson(memberList))
+}
+
+func TestGetUserDetail(t *testing.T) {
+	memberList, _ := CreateClient().GetDepMember("1")
+	t.Logf(json.ToJson(memberList))
+
+	resp, _ := CreateClient().GetUserDetail(memberList.UserIds[2], nil)
+	t.Logf(json.ToJson(resp))
 }

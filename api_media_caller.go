@@ -5,10 +5,10 @@ import (
 	"github.com/polaris-team/dingding-sdk-golang/json"
 )
 
-func UploadMedia(accessToken string, mediaType string, path string) (UploadMediaResp, error) {
+func (client *DingTalkClient) UploadMedia(mediaType string, path string) (UploadMediaResp, error) {
 
 	params := map[string]string{
-		"access_token": accessToken,
+		"access_token": client.AccessToken,
 		"type":         mediaType,
 	}
 	body, err := http.PostFile("https://oapi.dingtalk.com/media/upload", params, path, "media")

@@ -5,11 +5,13 @@ import (
 	"github.com/polaris-team/dingding-sdk-golang/json"
 )
 
-func GetUserDetail(accessToken string, userId string, lang *string) (GetUserDetailResp, error) {
+func (client *DingTalkClient) GetUserDetail(userId string, lang *string) (GetUserDetailResp, error) {
 	params := map[string]string{
-		"access_token": accessToken,
+		"access_token": client.AccessToken,
 		"userid":       userId,
-		"lang":         *lang,
+	}
+	if lang != nil {
+		params["lang"] = *lang
 	}
 	body, err := http.Get("https://oapi.dingtalk.com/user/get", params)
 	resp := GetUserDetailResp{}
@@ -20,9 +22,9 @@ func GetUserDetail(accessToken string, userId string, lang *string) (GetUserDeta
 	return resp, err
 }
 
-func GetDepMember(accessToken string, deptId string) (GetDepMemberResp, error) {
+func (client *DingTalkClient) GetDepMember(deptId string) (GetDepMemberResp, error) {
 	params := map[string]string{
-		"access_token": accessToken,
+		"access_token": client.AccessToken,
 		"deptId":       deptId,
 	}
 	body, err := http.Get("https://oapi.dingtalk.com/user/getDeptMember", params)

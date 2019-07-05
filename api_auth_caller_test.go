@@ -6,16 +6,19 @@ import (
 )
 
 func TestGetCorpToken(t *testing.T) {
-	corpTokenInfo, _ := GetCorpToken(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID)
+	corpTokenInfo, _ := CreateCorp().GetCorpToken()
 	t.Logf(json.ToJson(corpTokenInfo))
 }
 
 func TestGetAuthInfo(t *testing.T) {
-	corpAuthInfo, _ := GetAuthInfo(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID)
+	corpAuthInfo, _ := CreateCorp().GetAuthInfo()
 	t.Logf(json.ToJson(corpAuthInfo))
 }
 
 func TestGetAgent(t *testing.T) {
-	agentInfo, _ := GetAgent(ACCESS_KEY, SUITE_SECRET, SUITE_TICKET, AUTH_CORP_ID, 273673341)
+	cp := CreateCorp()
+	corpAuthInfo, _ := cp.GetAuthInfo()
+
+	agentInfo, _ := cp.GetAgent(corpAuthInfo.AuthInfo.Agent[0].AgentId)
 	t.Logf(json.ToJson(agentInfo))
 }

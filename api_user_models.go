@@ -7,11 +7,13 @@ type BaseResp struct {
 
 type GetDepMemberResp struct {
 	BaseResp
+
 	UserIds []string `json:"userIds"`
 }
 
 type GetUserDetailResp struct {
 	BaseResp
+
 	Name            string           `json:"name"`
 	UnionId         string           `json:"unionid"`
 	UserId          string           `json:"userid"`
@@ -22,11 +24,12 @@ type GetUserDetailResp struct {
 	Department      []int            `json:"department"`
 	OrderInDepts    string           `json:"orderInDepts"`
 	Active          bool             `json:"active"`
-	Avatar          bool             `json:"avatar"`
+	Avatar          string           `json:"avatar"`
 	IsAdmin         bool             `json:"isAdmin"`
 	IsHide          bool             `json:"isHide"`
 	JobNumber       string           `json:"jobnumber"`
 	Position        string           `json:"position"`
+	DingId          string           `json:"dingId"`
 	Roles           []UserDetailRole `json:"roles"`
 }
 

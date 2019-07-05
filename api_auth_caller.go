@@ -9,7 +9,7 @@ import (
 )
 
 //Get a common interface for enterprise authentication information
-func CorpAuth(url string, accessKey string, suiteSecret string, suiteTicket string, authCorpId string, agentId int) (string, error) {
+func CorpAuth(url string, suiteKey string, suiteSecret string, suiteTicket string, authCorpId string, agentId int) (string, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10) + "\n" + suiteTicket
 
@@ -19,7 +19,7 @@ func CorpAuth(url string, accessKey string, suiteSecret string, suiteTicket stri
 
 	params := map[string]string{
 		"timestamp":   strconv.FormatInt(timestamp, 10),
-		"accessKey":   accessKey,
+		"accessKey":   suiteKey,
 		"suiteTicket": suiteTicket,
 		"signature":   afterUrlEncode,
 	}
@@ -29,7 +29,7 @@ func CorpAuth(url string, accessKey string, suiteSecret string, suiteTicket stri
 	}
 	if agentId != 0 {
 		bodyParams["agentid"] = strconv.Itoa(agentId)
-		bodyParams["suite_key"] = accessKey
+		bodyParams["suite_key"] = suiteKey
 	}
 
 	body, _ := json.ToJson(bodyParams)
@@ -38,8 +38,8 @@ func CorpAuth(url string, accessKey string, suiteSecret string, suiteTicket stri
 
 //Desc: 获取企业凭证
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/hv357q
-func GetCorpToken(accessKey string, suiteSecret string, suiteTicket string, authCorpId string) (GetCorpTokenResp, error) {
-	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_corp_token", accessKey, suiteSecret, suiteTicket, authCorpId, 0)
+func (corp *Corp) GetCorpToken() (GetCorpTokenResp, error) {
+	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_corp_token", corp.SuiteKey, corp.SuiteSecret, corp.SuiteTicket, corp.CorpId, 0)
 	resp := GetCorpTokenResp{}
 	if err != nil {
 		return resp, err
@@ -50,8 +50,8 @@ func GetCorpToken(accessKey string, suiteSecret string, suiteTicket string, auth
 
 //Desc: 获取企业授权信息
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/fmdqvx
-func GetAuthInfo(accessKey string, suiteSecret string, suiteTicket string, authCorpId string) (GetAuthInfoResp, error) {
-	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_auth_info", accessKey, suiteSecret, suiteTicket, authCorpId, 0)
+func (corp *Corp) GetAuthInfo() (GetAuthInfoResp, error) {
+	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_auth_info", corp.SuiteKey, corp.SuiteSecret, corp.SuiteTicket, corp.CorpId, 0)
 	resp := GetAuthInfoResp{}
 	if err != nil {
 		return resp, err
@@ -62,8 +62,8 @@ func GetAuthInfo(accessKey string, suiteSecret string, suiteTicket string, authC
 
 //Desc: 获取授权应用信息
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/vfitg0
-func GetAgent(accessKey string, suiteSecret string, suiteTicket string, authCorpId string, agentId int) (GetAgentResp, error) {
-	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_agent", accessKey, suiteSecret, suiteTicket, authCorpId, agentId)
+func (corp *Corp) GetAgent(agentId int) (GetAgentResp, error) {
+	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_agent", corp.SuiteKey, corp.SuiteSecret, corp.SuiteTicket, corp.CorpId, agentId)
 	resp := GetAgentResp{}
 	if err != nil {
 		return resp, err
