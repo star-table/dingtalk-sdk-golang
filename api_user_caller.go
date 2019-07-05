@@ -5,6 +5,10 @@ import (
 	"github.com/polaris-team/dingding-sdk-golang/json"
 )
 
+func GetUserDetail(accessToken string, userId string, lang *string) {
+
+}
+
 func GetDepMember(accessToken string, deptId string) (GetDepMemberResp, error) {
 	params := map[string]string{
 		"access_token": accessToken,
