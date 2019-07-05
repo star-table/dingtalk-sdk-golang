@@ -84,3 +84,22 @@ func RecallWorkNotice(accessToken string, agentId int, taskId int) (WorkNoticeRe
 	json.FromJson(body, &resp)
 	return resp, err
 }
+
+//Desc: 发送普通消息
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/wvdxel
+func SendNormalNotice(accessToken string, sender string, cid String, msg WorkNoticeMsg) (SendNormalNoticeResp, error) {
+	msgJsonStr, _ := json.ToJson(msg)
+	params := map[string]string{
+		"access_token": accessToken,
+		"sender":       sender,
+		"cid":          cid,
+		"msg":          encrypt.URLEncode(msgJsonStr),
+	}
+	body, err := http.Post("https://oapi.dingtalk.com/topapi/message/corpconversation/recall", params, "")
+	resp := SendNormalNoticeResp{}
+	if err != nil {
+		return resp, err
+	}
+	json.FromJson(body, &resp)
+	return resp, err
+}

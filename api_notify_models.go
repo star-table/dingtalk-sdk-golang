@@ -35,6 +35,12 @@ type GetWorkNoticeResultResp struct {
 	SendResult NoticeSendResult `json:"send_result"`
 }
 
+type SendNormalNoticeResp struct {
+	ErrCode  int    `json:"errcode"`
+	ErrMsg   string `json:"errmsg"`
+	Receiver string `json:"receiver"`
+}
+
 type NoticeSendResult struct {
 	InvalidUserIdList   []string `json:"invalid_user_id_list"`
 	ForbiddenUserIdList []string `json:"forbidden_user_id_list"`
