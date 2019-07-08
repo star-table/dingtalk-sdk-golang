@@ -13,7 +13,7 @@ type GetDeptListResp struct {
 		ParentId        int    `json:"parentid"`
 		CreateDeptGroup bool   `json:"createDeptGroup"`
 		AutoAddUser     bool   `json:"autoAddUser"`
-	}
+	} `json:"department"`
 }
 
 type GetDeptDetailResp struct {
