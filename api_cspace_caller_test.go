@@ -19,4 +19,19 @@ func TestDingTalkClient_SendDingPanFileToSingleChat(t *testing.T) {
 
 	resp, _ := client.SendDingPanFileToSingleChat("15001956402427783", encrypt.URLEncode(mediaId), encrypt.URLEncode(filename))
 	t.Log(json.ToJson(resp))
+
+}
+
+func TestDingTalkClient_AddFileToUserCSpace(t *testing.T) {
+	//TODO
+}
+
+func TestDingTalkClient_GetCustomSpace(t *testing.T) {
+	resp, err := CreateClient().GetCustomSpace("test")
+	t.Log(json.ToJson(resp))
+	t.Log(err)
+}
+
+func TestDingTalkClient_GrantCustomSpace(t *testing.T) {
+	//TODO
 }

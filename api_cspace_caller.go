@@ -49,15 +49,72 @@ func (client *DingTalkClient) SendDingPanFileToSingleChat(userId string, mediaId
 
 //Desc: 新增文件到用户钉盘
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-6
-func (client *DingTalkClient) AddFileToUserCSpace(userId string, mediaId string, fileName string) (*BaseResp, error) {
+func (client *DingTalkClient) AddFileToUserCSpace(code string, mediaId string, spaceId string, folderId string, name string, overwrite bool) (*AddFileToUserCSpaceResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
 		"agent_id":     strconv.Itoa(client.AgentId),
-		"userid":       userId,
+		"code":         code,
 		"media_id":     mediaId,
-		"file_name":    fileName,
+		"space_id":     spaceId,
+		"folder_id":    folderId,
+		"name":         name,
+		"overwrite":    strconv.FormatBool(overwrite),
 	}
-	body, err := http.Post("https://oapi.dingtalk.com/cspace/add_to_single_chat", params, "")
+	body, err := http.Post("https://oapi.dingtalk.com/cspace/add", params, "")
+	resp := AddFileToUserCSpaceResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+//Desc: 获取企业下的自定义空间
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-7
+func (client *DingTalkClient) GetCustomSpace(domain string) (*GetCustomSpaceResp, error) {
+	params := map[string]string{
+		"access_token": client.AccessToken,
+	}
+	if client.AgentId != 0 {
+		params["agent_id"] = strconv.Itoa(client.AgentId)
+	}
+	if domain != "" {
+		params["domain"] = domain
+	}
+	body, err := http.Get("https://oapi.dingtalk.com/cspace/get_custom_space", params)
+	resp := GetCustomSpaceResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+//Desc: 授权用户访问企业自定义空间
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-8
+func (client *DingTalkClient) GrantCustomSpace(domain string, grantType string, userId string, path string, fileIds string, duration int) (*BaseResp, error) {
+	params := map[string]string{
+		"access_token": client.AccessToken,
+		"type":         grantType,
+		"userid":       userId,
+		"duration":     strconv.Itoa(duration),
+	}
+	if domain != "" {
+		params["domain"] = domain
+	}
+	if path != "" {
+		params["path"] = path
+	}
+	if fileIds != "" {
+		params["fileIds"] = fileIds
+	}
+	if client.AgentId != 0 {
+		params["agent_id"] = strconv.Itoa(client.AgentId)
+	}
+	if domain != "" {
+		params["domain"] = domain
+	}
+	body, err := http.Get("https://oapi.dingtalk.com/cspace/grant_custom_space", params)
 	resp := BaseResp{}
 	if err != nil {
 		return nil, err
