@@ -77,7 +77,7 @@ func (client *DingTalkClient) ListParentDeptsByDept(id string) (ListParentDeptsB
 func (client *DingTalkClient) ListParentDepts(userId string) (ListParentDeptsResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"userid":       userId,
+		"userId":       userId,
 	}
 
 	body, err := http.Get("https://oapi.dingtalk.com/department/list_parent_depts", params)
