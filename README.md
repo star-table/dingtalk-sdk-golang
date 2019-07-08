@@ -8,6 +8,7 @@ Partial feature structure and completion:
    - [x] 获取企业凭证
    - [x] 获取企业授权信息
    - [x] 获取授权应用信息
+   - [x] 获取jsapi_ticket
  - [ ] 身份验证
  - [ ] 通讯录管理
    - [x] 用户管理
