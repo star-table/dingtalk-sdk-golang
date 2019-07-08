@@ -6,7 +6,6 @@ import (
 )
 
 func TestGetDepMember(t *testing.T) {
-
 	memberList, _ := CreateClient().GetDepMemberIds("1")
 	t.Logf(json.ToJson(memberList))
 }
