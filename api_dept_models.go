@@ -1,21 +1,16 @@
 package dingding_sdk_golang
 
-type BaseResp struct {
-	ErrCode int    `json:"errcode""`
-	ErrMsg  string `json:"errmsg"`
-}
-
 type GetSubdeptResp struct {
 	BaseResp
-	SubDeptIdList []string `json:"subDeptIdList"`
+	SubDeptIdList []int `json:"sub_dept_id_list"`
 }
 
 type GetDeptListResp struct {
 	BaseResp
 	Department []struct {
-		Id              string `json:"id"`
+		Id              int    `json:"id"`
 		Name            string `json:"name"`
-		ParentId        string `json:"parentId"`
+		ParentId        int    `json:"parentid"`
 		CreateDeptGroup bool   `json:"createDeptGroup"`
 		AutoAddUser     bool   `json:"autoAddUser"`
 	}
@@ -23,28 +18,29 @@ type GetDeptListResp struct {
 
 type GetDeptDetailResp struct {
 	BaseResp
-	Id                   string `json:"id"`
-	Name                 string `json:"name"`
-	Order                int64  `json:"order"`
-	CreateDeptGroup      bool   `json:"createDeptGroup"`
-	AutoAddUser          bool   `json:"autoAddUser"`
-	DeptHiding           bool   `json:"deptHiding"`
-	DeptPermits          string `json:"deptPermits"`
-	UserPermits          string `json:"userPermits"`
-	OuterDept            bool   `json:"outerDept"`
-	OuterPermitDepts     string `json:"outerPermitDepts"`
-	OuterPermitUsers     string `json:"outerPermitUsers"`
-	OrgDeptOwner         string `json:"orgDeptOwner"`
-	DeptManageUseridList string `json:"deptManageUseridList"`
-	SourceIdentifier     string `json:"sourcIdentifier"`
+	Id                    int    `json:"id"`
+	Name                  string `json:"name"`
+	Order                 int64  `json:"order"`
+	ParentId              int    `json:"parentid"`
+	CreateDeptGroup       bool   `json:"createDeptGroup"`
+	AutoAddUser           bool   `json:"autoAddUser"`
+	DeptHiding            bool   `json:"deptHiding"`
+	DeptPermits           string `json:"deptPermits"`
+	UserPermits           string `json:"userPermits"`
+	OuterDept             bool   `json:"outerDept"`
+	OuterPermitDepts      string `json:"outerPermitDepts"`
+	OuterPermitUsers      string `json:"outerPermitUsers"`
+	OrgDeptOwner          string `json:"orgDeptOwner"`
+	DeptManagerUseridList string `json:"deptManagerUseridList"`
+	SourceIdentifier      string `json:"sourceIdentifier"`
 }
 
 type ListParentDeptsByDeptResp struct {
 	BaseResp
-	ParentIds []string `json:"parentIds"`
+	ParentIds []int `json:"parentIds"`
 }
 
 type ListParentDeptsResp struct {
 	BaseResp
-	Department [][]string
+	Department [][]int `json:"department"`
 }
