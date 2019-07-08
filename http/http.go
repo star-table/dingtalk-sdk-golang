@@ -38,6 +38,11 @@ func PostFile(url string, params map[string]string, path string, name string) (s
 	return ResponseHandle(resp, err)
 }
 
+func PostFileWithReader(url string, params map[string]string, reader io.Reader) (string, error) {
+	resp, err := http.Post(url+ConvertToQueryParams(params), "multipart/form-data", reader)
+	return ResponseHandle(resp, err)
+}
+
 func Get(url string, params map[string]string) (string, error) {
 	resp, err := http.Get(url + ConvertToQueryParams(params))
 	return ResponseHandle(resp, err)

@@ -1,8 +1,10 @@
 package dingding_sdk_golang
 
 import (
+	"fmt"
 	"github.com/polaris-team/dingding-sdk-golang/http"
 	"github.com/polaris-team/dingding-sdk-golang/json"
+	"io"
 	"os"
 	"strconv"
 )
@@ -21,6 +23,63 @@ func (client *DingTalkClient) FileUploadSingle(path string) (*FileUploadSingleRe
 	}
 	body, err := http.PostFile("https://oapi.dingtalk.com/file/upload/single", params, path, "media")
 	resp := FileUploadSingleResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+//Desc: 分块上传文件：开启分块上传事务
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-12
+func (client *DingTalkClient) BeginUploadTransaction(size int64, count int) (*BeginUploadTransaction, error) {
+	params := map[string]string{
+		"access_token":  client.AccessToken,
+		"agent_id":      strconv.Itoa(client.AgentId),
+		"file_size":     strconv.FormatInt(size, 10),
+		"chunk_numbers": strconv.Itoa(count),
+	}
+	body, err := http.Post("https://oapi.dingtalk.com/file/upload/transaction", params, "")
+	resp := BeginUploadTransaction{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+//Desc: 分块上传文件：上传文件块
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-12
+func (client *DingTalkClient) BeginUploadChunk(uploadId string, sequence int, reader io.Reader) (*BaseResp, error) {
+	params := map[string]string{
+		"access_token":   client.AccessToken,
+		"agent_id":       strconv.Itoa(client.AgentId),
+		"upload_id":      uploadId,
+		"chunk_sequence": strconv.Itoa(sequence),
+	}
+	body, err := http.PostFileWithReader("https://oapi.dingtalk.com/file/upload/chunk", params, reader)
+	fmt.Println(body)
+	resp := BaseResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+//Desc: 提交文件上传事务
+//Doc: https://open-doc.dingtalk.com/microapp/serverapi3/zmmoa5#-12
+func (client *DingTalkClient) CommitUploadTransaction(size int64, count int, uploadId string) (*CommitUploadTransaction, error) {
+	params := map[string]string{
+		"access_token":  client.AccessToken,
+		"agent_id":      strconv.Itoa(client.AgentId),
+		"upload_id":     uploadId,
+		"file_size":     strconv.FormatInt(size, 10),
+		"chunk_numbers": strconv.Itoa(count),
+	}
+	body, err := http.Get("https://oapi.dingtalk.com/file/upload/transaction", params)
+	fmt.Println(body)
+	resp := CommitUploadTransaction{}
 	if err != nil {
 		return nil, err
 	}
