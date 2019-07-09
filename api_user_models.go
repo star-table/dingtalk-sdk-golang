@@ -7,7 +7,6 @@ type BaseResp struct {
 
 type GetDepMemberIdsResp struct {
 	BaseResp
-
 	UserIds []string `json:"userIds"`
 }
 
