@@ -95,3 +95,102 @@ func TestDingTalkClient_CreateAndUpdateWorkRecord(t *testing.T) {
 	t.Log(json.ToJson(updateResp))
 	t.Log(err)
 }
+
+func TestDingTalkClient_CreateAndUpdateWorkRecordTask(t *testing.T) {
+	client := CreateClient()
+
+	req := CreateWorkRecordRequest{
+		ProcessCode:      "PROC-9EDD9794-2C7F-458D-ABAF-394D492CAABB",
+		OriginatorUserId: "15001956402427783",
+		FormComponentValues: []FormComponentValues{
+			{
+				Name:  "username",
+				Value: "nico",
+			},
+		},
+		Url: "http://study.ikuvn.com",
+	}
+	title := "倒垃圾待办实例-任务测试1"
+	resp, err := client.CreateWorkRecord(req, &title)
+	t.Log(json.ToJson(resp))
+	t.Log(err)
+
+	createTaskReq := CreateWorkRecordTaskRequest{
+		ProcessInstanceId: resp.Result.ProcessInstanceId,
+		Tasks: []CreateWorkRecordTaskTop{
+			{
+				UserId: "15001956402427783",
+				Url:    "http://study.ikuvn.com",
+			},
+		},
+	}
+
+	createTaskResp, err := client.CreateWorkRecordTask(createTaskReq)
+	t.Log(json.ToJson(createTaskResp))
+	t.Log(err)
+
+	updateTaskReq := UpdateWorkRecordTaskRequest{
+		ProcessInstanceId: resp.Result.ProcessInstanceId,
+		Tasks: []UpdateWorkRecordTaskTop{
+			{
+				TaskId: createTaskResp.Tasks[0].TaskId,
+				Status: "COMPLETED",
+				Result: "agree",
+			},
+		},
+	}
+
+	updateTaskResp, err := client.UpdateWorkRecordTask(updateTaskReq)
+	t.Log(json.ToJson(updateTaskResp))
+	t.Log(err)
+
+	//updateTaskReq.Tasks[0].Status = "CANCELED"
+	//updateTaskResp, err = client.UpdateWorkRecordTask(updateTaskReq)
+	//t.Log(json.ToJson(updateTaskResp))
+	//t.Log(err)
+}
+
+func TestDingTalkClient_CancelTaskGroup(t *testing.T) {
+	client := CreateClient()
+
+	req := CreateWorkRecordRequest{
+		ProcessCode:      "PROC-9EDD9794-2C7F-458D-ABAF-394D492CAABB",
+		OriginatorUserId: "15001956402427783",
+		FormComponentValues: []FormComponentValues{
+			{
+				Name:  "username",
+				Value: "nico",
+			},
+		},
+		Url: "http://study.ikuvn.com",
+	}
+	title := "倒垃圾待办实例-任务测试1"
+	resp, err := client.CreateWorkRecord(req, &title)
+	t.Log(json.ToJson(resp))
+	t.Log(err)
+
+	activityId := "abcdfadagaga"
+
+	createTaskReq := CreateWorkRecordTaskRequest{
+		ProcessInstanceId: resp.Result.ProcessInstanceId,
+		ActivityId:        &activityId,
+		Tasks: []CreateWorkRecordTaskTop{
+			{
+				UserId: "15001956402427783",
+				Url:    "http://study.ikuvn.com",
+			},
+		},
+	}
+
+	createTaskResp, err := client.CreateWorkRecordTask(createTaskReq)
+	t.Log(json.ToJson(createTaskResp))
+	t.Log(err)
+
+	cancelReq := CancelTaskGroupRequest{
+		ProcessInstanceId: resp.Result.ProcessInstanceId,
+		ActivityId:        &activityId,
+	}
+	cancelResp, err := client.CancelTaskGroup(cancelReq)
+	t.Log(json.ToJson(cancelResp))
+	t.Log(err)
+}

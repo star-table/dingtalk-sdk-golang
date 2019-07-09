@@ -44,6 +44,51 @@ type UpdateWorkRecordRequest struct {
 	Result            string `json:"result,omitempty"`
 }
 
+type CreateWorkRecordTaskRequest struct {
+	AgentId           int                       `json:"agentid"`
+	ProcessInstanceId string                    `json:"process_instance_id"`
+	ActivityId        *string                   `json:"activity_id,omitempty"`
+	Tasks             []CreateWorkRecordTaskTop `json:"tasks"`
+}
+
+type UpdateWorkRecordTaskRequest struct {
+	AgentId           int                       `json:"agentid"`
+	ProcessInstanceId string                    `json:"process_instance_id"`
+	Tasks             []UpdateWorkRecordTaskTop `json:"tasks"`
+}
+
+type CancelTaskGroupRequest struct {
+	AgentId           int     `json:"agentid"`
+	ProcessInstanceId string  `json:"process_instance_id"`
+	ActivityId        *string `json:"activity_id"`
+}
+
+type UpdateWorkRecordTaskTop struct {
+	TaskId int    `json:"task_id"`
+	Status string `json:"status"`
+	Result string `json:"result,omitempty"`
+}
+
+type CreateWorkRecordTaskResp struct {
+	BaseResp
+
+	Tasks []CreateWorkRecordTaskRespTasks `json:"tasks"`
+}
+
+type UpdateWorkRecordTaskResp struct {
+	CreateWorkRecordTaskResp
+}
+
+type CreateWorkRecordTaskRespTasks struct {
+	TaskId int    `json:"task_id"`
+	UserId string `json:"userid"`
+}
+
+type CreateWorkRecordTaskTop struct {
+	UserId string `json:"userid"`
+	Url    string `json:"url"`
+}
+
 type FormComponentValues struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
