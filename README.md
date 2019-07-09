@@ -10,7 +10,7 @@ Partial feature structure and completion:
    - [x] 获取授权应用信息
    - [x] 获取jsapi_ticket
  - [ ] 身份验证
- - [ ] 通讯录管理
+ - [x] 通讯录管理
    - [x] 用户管理
      - [x] 获取用户详情
      - [x] 获取部门用户userid列表
@@ -46,6 +46,15 @@ Partial feature structure and completion:
 	 - [x] 工作通知消息撤回
    - [x] 发送普通消息
      - [x] 发送普通消息
+ - [ ] 审批待办
+   - [x] 待办
+     - [x] 创建或更新待办模板
+     - [x] 删除待办模板
+     - [x] 创建待办实例
+     - [x] 更新实例状态
+     - [x] 创建待办任务
+     - [x] 更新任务状态
+     - [x] 批量取消任务
  - [ ] 文件存储
    - [x] 管理媒体文件
      - [x] 上传媒体文件
