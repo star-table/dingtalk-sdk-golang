@@ -6,12 +6,47 @@ type CreateOrUpdateBackLogResp struct {
 	Result CreateOrUpdateBackLogResult `json:"result"`
 }
 
+type CreateWorkRecordResp struct {
+	BaseResp
+
+	Result CreateWorkRecordResult `json:"result"`
+}
+
+type CreateWorkRecordResult struct {
+	ProcessInstanceId string `json:"process_instance_id"`
+}
+
 type CreateOrUpdateBackLogResult struct {
 	ProcessCode string `json:"process_code"`
 }
 
 type CreateOrUpdateBackLogReq struct {
 	SaveProcessRequest SaveProcessRequest `json:"SaveProcessRequest"`
+}
+
+type DeleteBackLogReq struct {
+	AgentId     int    `json:"agentid"`
+	ProcessCode string `json:"process_code"`
+}
+
+type CreateWorkRecordRequest struct {
+	AgentId             int                   `json:"agentid"`
+	ProcessCode         string                `json:"process_code"`
+	OriginatorUserId    string                `json:"originator_user_id"`
+	FormComponentValues []FormComponentValues `json:"form_component_values"`
+	Url                 string                `json:"url"`
+}
+
+type UpdateWorkRecordRequest struct {
+	AgentId           int    `json:"agentid"`
+	ProcessInstanceId string `json:"process_instance_id"`
+	Status            string `json:"status"`
+	Result            string `json:"result,omitempty"`
+}
+
+type FormComponentValues struct {
+	Name  string `json:"name"`
+	Value string `json:"value"`
 }
 
 type SaveProcessRequest struct {
