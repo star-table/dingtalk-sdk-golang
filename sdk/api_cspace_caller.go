@@ -2,8 +2,8 @@ package sdk
 
 import (
 	"fmt"
-	"github.com/polaris-team/dingding-sdk-golang/http"
-	"github.com/polaris-team/dingding-sdk-golang/json"
+	"github.com/polaris-team/dingtalk-sdk-golang/http"
+	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"io"
 	"os"
 	"strconv"

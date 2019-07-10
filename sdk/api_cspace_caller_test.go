@@ -1,9 +1,9 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingding-sdk-golang/encrypt"
-	"github.com/polaris-team/dingding-sdk-golang/file"
-	"github.com/polaris-team/dingding-sdk-golang/json"
+	"github.com/polaris-team/dingtalk-sdk-golang/encrypt"
+	"github.com/polaris-team/dingtalk-sdk-golang/file"
+	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"os"
 	"testing"
 	"time"

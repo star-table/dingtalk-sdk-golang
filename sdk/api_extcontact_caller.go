@@ -1,8 +1,8 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingding-sdk-golang/http"
-	"github.com/polaris-team/dingding-sdk-golang/json"
+	"github.com/polaris-team/dingtalk-sdk-golang/http"
+	"github.com/polaris-team/dingtalk-sdk-golang/json"
 )
 
 func (client *DingTalkClient) ListLabelGroups(size string, offset string) (ListLabelGroupsResp, error) {
