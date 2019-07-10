@@ -30,6 +30,7 @@ func NewDingTalkClient(accessToken string, agentId int) *DingTalkClient {
 		AccessToken: accessToken,
 		AgentId:     agentId,
 	}
+
 }
 
 func (corp *Corp) CreateDingTalkClient() (*DingTalkClient, error) {
