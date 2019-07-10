@@ -67,4 +67,6 @@ Partial feature structure and completion:
 	 - [ ] 开启分块上传事务
 	 - [ ] 上传文件块
 	 - [ ] 提交文件上传事务
+ - [x] 群机器人
+     - [x] 自定义机器人
 	 
