@@ -5,6 +5,8 @@ import (
 	"github.com/polaris-team/dingtalk-sdk-golang/json"
 )
 
+//获取外部联系人标签列表
+//https://open-doc.dingtalk.com/microapp/serverapi3/grk4nv#khcve
 func (client *DingTalkClient) ListLabelGroups(size string, offset string) (ListLabelGroupsResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
@@ -22,6 +24,8 @@ func (client *DingTalkClient) ListLabelGroups(size string, offset string) (ListL
 	return resp, err
 }
 
+//获取外部联系人列表
+//https://open-doc.dingtalk.com/microapp/serverapi3/grk4nv#-1
 func (client *DingTalkClient) GetExtcontactList(size string, offset string) (GetExtcontactListResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
@@ -39,6 +43,8 @@ func (client *DingTalkClient) GetExtcontactList(size string, offset string) (Get
 	return resp, err
 }
 
+//获取外部联系人详情
+//https://open-doc.dingtalk.com/microapp/serverapi3/grk4nv#-2
 func (client *DingTalkClient) GetExtcontactDetail(userId string) (GetExtcontactDetailResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
