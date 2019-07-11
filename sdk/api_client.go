@@ -51,9 +51,9 @@ func (corp *Corp) CreateDingTalkClient() (*DingTalkClient, error) {
 
 //Create Corp just for test
 func CreateCorp() *Corp {
-	os.Setenv("SUITE_KEY", "suitexztvohdie8cexrjt")
-	os.Setenv("SUITE_SECRET", "xONuoQUBjKwnxmTm6YXQDRGDsL2fR8mq3iXQlP02FxkdwIFw47V-mv2ZrHPIqcr7")
-	return NewCorp("4obevC6UCuxMPFOKKRtCleAzbp9Pz6ft3dHDiiXAEkmD65hs9Sdh5N4fGw2307Hri65huD1IoCapeM8TnE4s8V", "ding8ac2bab2b708b3cc35c2f4657eb6378f")
+	os.Setenv("SUITE_KEY", "xxx")
+	os.Setenv("SUITE_SECRET", "xxx")
+	return NewCorp("xxx", "xxx")
 }
 
 //Create Client just for test
@@ -65,6 +65,9 @@ func CreateClient() *DingTalkClient {
 func ExcuteOapi(url string, accessKey string, accessSecret string, suiteTicket string, corpId string, body string) (string, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10)
+	if suiteTicket != "" {
+		nativeSignature += "\n" + suiteTicket
+	}
 
 	afterHmacSHA256 := encrypt.SHA256(nativeSignature, accessSecret)
 	afterBase64 := encrypt.BASE64(afterHmacSHA256)
