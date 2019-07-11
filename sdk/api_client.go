@@ -65,6 +65,9 @@ func CreateClient() *DingTalkClient {
 func ExcuteOapi(url string, accessKey string, accessSecret string, suiteTicket string, corpId string, body string) (string, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10)
+	if suiteTicket != "" {
+		nativeSignature += "\n" + suiteTicket
+	}
 
 	afterHmacSHA256 := encrypt.SHA256(nativeSignature, accessSecret)
 	afterBase64 := encrypt.BASE64(afterHmacSHA256)
