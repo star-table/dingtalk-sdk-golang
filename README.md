@@ -9,7 +9,10 @@ Partial feature structure and completion:
    - [x] 获取企业授权信息
    - [x] 获取授权应用信息
    - [x] 获取jsapi_ticket
- - [ ] 身份验证
+ - [x] 身份验证
+   - [x] 获取用户userid(第三方企业应用免登)
+   - [x] 获取应用管理员的身份信息(应用管理后台免登)
+   - [x] 服务端通过临时授权码获取授权用户的个人信息
  - [x] 通讯录管理
    - [x] 用户管理
      - [x] 获取用户详情
@@ -46,7 +49,7 @@ Partial feature structure and completion:
 	 - [x] 工作通知消息撤回
    - [x] 发送普通消息
      - [x] 发送普通消息
- - [ ] 审批待办
+ - [x] 审批待办
    - [x] 待办
      - [x] 创建或更新待办模板
      - [x] 删除待办模板
@@ -67,4 +70,6 @@ Partial feature structure and completion:
 	 - [ ] 开启分块上传事务
 	 - [ ] 上传文件块
 	 - [ ] 提交文件上传事务
+ - [x] 群机器人
+     - [x] 自定义机器人
 	 
