@@ -18,7 +18,7 @@ func TestGetUserInfoFromAdmin(t *testing.T) {
 }
 
 func TestDingTalkClient_GetUserInfoByCode(t *testing.T) {
-	resp, err := CreateClient().GetUserInfoByCode("acd7dba7ae7b316a9c158dfdf7254ff6")
+	resp, err := CreateClient().GetUserInfoByCode("cd4e3c40ad683cc68454ac598f3a3e01", "dingoaueraeyoys7dgyx0u", "C8CyQ79MvK5s5nLyNZu5cCgDVd3MW7yAKQyDoaN_Ff37OaMjY19WIVQaMQNumNs4")
 	t.Log(json.ToJson(resp))
 	t.Log(err)
 }
