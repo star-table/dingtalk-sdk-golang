@@ -2,9 +2,23 @@ package sdk
 
 import (
 	"github.com/polaris-team/dingtalk-sdk-golang/json"
+	"os"
 	"testing"
 	"time"
 )
+
+//Create Corp just for test
+func CreateCorp() *Corp {
+	os.Setenv("SUITE_KEY", "xxx")
+	os.Setenv("SUITE_SECRET", "xxx")
+	return NewCorp("xxx", "xxx")
+}
+
+//Create Client just for test
+func CreateClient() *DingTalkClient {
+	client, _ := CreateCorp().CreateDingTalkClient()
+	return client
+}
 
 func TestCorp_GetCorpToken(t *testing.T) {
 	corpTokenInfo, _ := CreateCorp().GetCorpToken()
