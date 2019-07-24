@@ -26,7 +26,7 @@ type GetRoleDetailResp struct {
 
 type GetUserInRoleResult struct {
 	HasMore    bool       `json:"hasMore"`
-	NextCursor int        `json:"nextCursor"`
+	NextCursor int64      `json:"nextCursor"`
 	UserList   []UserList `json:"list"`
 }
 
@@ -37,7 +37,7 @@ type GetRoleListResult struct {
 
 type RoleGroup struct {
 	Name    string `json:"name"`
-	GroupId int    `json:"groupId"`
+	GroupId int64  `json:"groupId"`
 	Roles   []Role `json:"roles"`
 }
 
@@ -48,10 +48,10 @@ type RoleGroupV1 struct {
 
 type RoleV1 struct {
 	Name string `json:"role_name"`
-	Id   int    `json:"role_id"`
+	Id   int64  `json:"role_id"`
 }
 
 type Role struct {
 	Name string `json:"name"`
-	Id   int    `json:"id"`
+	Id   int64  `json:"id"`
 }

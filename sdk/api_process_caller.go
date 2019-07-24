@@ -36,12 +36,12 @@ func (client *DingTalkClient) SaveProcess(saveProcessRequest SaveProcessReq, fak
 
 //查询已设置为条件的表单组件
 //https://open-doc.dingtalk.com/microapp/serverapi3/yqcw6y
-func (client *DingTalkClient) FormConditionList(processCode string, agentId *int) (FormConditionListResp, error) {
+func (client *DingTalkClient) FormConditionList(processCode string, agentId *int64) (FormConditionListResp, error) {
 	request := map[string]string{
 		"process_code": processCode,
 	}
 	if agentId != nil {
-		request["agentid"] = strconv.Itoa(*agentId)
+		request["agentid"] = strconv.FormatInt(*agentId, 10)
 	}
 	requestJson, _ := json.ToJson(request)
 	params := map[string]string{
@@ -74,6 +74,8 @@ func (client *DingTalkClient) CreateProcessInstance(createParams CreateProcessIn
 				v = value.(string)
 			} else if tname == "int" {
 				v = strconv.Itoa(value.(int))
+			} else if tname == "int64" {
+				v = strconv.FormatInt(value.(int64), 10)
 			} else {
 				if !reflect2.IsNil(value) {
 					v, _ = json.ToJson(value)
@@ -87,7 +89,7 @@ func (client *DingTalkClient) CreateProcessInstance(createParams CreateProcessIn
 	}
 	params["access_token"] = client.AccessToken
 	if params["agent_id"] == "" {
-		params["agent_id"] = strconv.Itoa(client.AgentId)
+		params["agent_id"] = strconv.FormatInt(client.AgentId, 10)
 	}
 
 	body, err := http.Post("https://oapi.dingtalk.com/topapi/processinstance/create", params, "")
@@ -122,7 +124,7 @@ func (client *DingTalkClient) GetCspaceInfo(userId string) (GetCspaceInfoResp, e
 	params := map[string]string{
 		"access_token": client.AccessToken,
 		"user_id":      userId,
-		"agent_id":     strconv.Itoa(client.AgentId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
 	}
 
 	body, err := http.Post("https://oapi.dingtalk.com/topapi/processinstance/cspace/info", params, "")

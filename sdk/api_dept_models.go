@@ -2,15 +2,15 @@ package sdk
 
 type GetSubdeptResp struct {
 	BaseResp
-	SubDeptIdList []int `json:"sub_dept_id_list"`
+	SubDeptIdList []int64 `json:"sub_dept_id_list"`
 }
 
 type GetDeptListResp struct {
 	BaseResp
 	Department []struct {
-		Id              int    `json:"id"`
+		Id              int64  `json:"id"`
 		Name            string `json:"name"`
-		ParentId        int    `json:"parentid"`
+		ParentId        int64  `json:"parentid"`
 		CreateDeptGroup bool   `json:"createDeptGroup"`
 		AutoAddUser     bool   `json:"autoAddUser"`
 	} `json:"department"`
@@ -18,10 +18,10 @@ type GetDeptListResp struct {
 
 type GetDeptDetailResp struct {
 	BaseResp
-	Id                    int    `json:"id"`
+	Id                    int64  `json:"id"`
 	Name                  string `json:"name"`
 	Order                 int64  `json:"order"`
-	ParentId              int    `json:"parentid"`
+	ParentId              int64  `json:"parentid"`
 	CreateDeptGroup       bool   `json:"createDeptGroup"`
 	AutoAddUser           bool   `json:"autoAddUser"`
 	DeptHiding            bool   `json:"deptHiding"`
@@ -37,10 +37,10 @@ type GetDeptDetailResp struct {
 
 type ListParentDeptsByDeptResp struct {
 	BaseResp
-	ParentIds []int `json:"parentIds"`
+	ParentIds []int64 `json:"parentIds"`
 }
 
 type ListParentDeptsResp struct {
 	BaseResp
-	Department [][]int `json:"department"`
+	Department [][]int64 `json:"department"`
 }

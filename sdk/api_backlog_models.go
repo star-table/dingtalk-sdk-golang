@@ -25,12 +25,12 @@ type CreateOrUpdateBackLogReq struct {
 }
 
 type DeleteBackLogReq struct {
-	AgentId     int    `json:"agentid"`
+	AgentId     int64  `json:"agentid"`
 	ProcessCode string `json:"process_code"`
 }
 
 type CreateWorkRecordRequest struct {
-	AgentId             int                   `json:"agentid"`
+	AgentId             int64                 `json:"agentid"`
 	ProcessCode         string                `json:"process_code"`
 	OriginatorUserId    string                `json:"originator_user_id"`
 	FormComponentValues []FormComponentValues `json:"form_component_values"`
@@ -38,33 +38,33 @@ type CreateWorkRecordRequest struct {
 }
 
 type UpdateWorkRecordRequest struct {
-	AgentId           int    `json:"agentid"`
+	AgentId           int64  `json:"agentid"`
 	ProcessInstanceId string `json:"process_instance_id"`
 	Status            string `json:"status"`
 	Result            string `json:"result,omitempty"`
 }
 
 type CreateWorkRecordTaskRequest struct {
-	AgentId           int                       `json:"agentid"`
+	AgentId           int64                     `json:"agentid"`
 	ProcessInstanceId string                    `json:"process_instance_id"`
 	ActivityId        *string                   `json:"activity_id,omitempty"`
 	Tasks             []CreateWorkRecordTaskTop `json:"tasks"`
 }
 
 type UpdateWorkRecordTaskRequest struct {
-	AgentId           int                       `json:"agentid"`
+	AgentId           int64                     `json:"agentid"`
 	ProcessInstanceId string                    `json:"process_instance_id"`
 	Tasks             []UpdateWorkRecordTaskTop `json:"tasks"`
 }
 
 type CancelTaskGroupRequest struct {
-	AgentId           int     `json:"agentid"`
+	AgentId           int64   `json:"agentid"`
 	ProcessInstanceId string  `json:"process_instance_id"`
 	ActivityId        *string `json:"activity_id"`
 }
 
 type UpdateWorkRecordTaskTop struct {
-	TaskId int    `json:"task_id"`
+	TaskId int64  `json:"task_id"`
 	Status string `json:"status"`
 	Result string `json:"result,omitempty"`
 }
@@ -80,7 +80,7 @@ type UpdateWorkRecordTaskResp struct {
 }
 
 type CreateWorkRecordTaskRespTasks struct {
-	TaskId int    `json:"task_id"`
+	TaskId int64  `json:"task_id"`
 	UserId string `json:"userid"`
 }
 
@@ -95,7 +95,7 @@ type FormComponentValues struct {
 }
 
 type SaveProcessRequest struct {
-	AgentId           int                 `json:"agentid"`
+	AgentId           int64               `json:"agentid"`
 	ProcessCode       string              `json:"process_code,omitempty"`
 	Name              string              `json:"name"`
 	Description       string              `json:"description"`

@@ -5,7 +5,7 @@ type GetCorpTokenResp struct {
 	BaseResp
 
 	AccessToken string `json:"access_token"`
-	ExpiresIn   int    `json:"expires_in"`
+	ExpiresIn   int64  `json:"expires_in"`
 }
 
 //======================== 获取企业授权信息: https://open-doc.dingtalk.com/microapp/serverapi3/hv357q
@@ -28,7 +28,7 @@ type AuthCorpInfo struct {
 	AuthChannel     string `json:"auth_channel"`
 	AuthChannelType string `json:"auth_channel_type"`
 	IsAuthenticated bool   `json:"is_authenticated"`
-	AuthLevel       int    `json:"auth_level"`
+	AuthLevel       int64  `json:"auth_level"`
 	InviteUrl       string `json:"invite_url"`
 	CorpProvince    string `json:"corp_province"`
 	CorpCity        string `json:"corp_city"`
@@ -44,8 +44,8 @@ type AuthInfo struct {
 
 type Agent struct {
 	AgentName string   `json:"agent_name"`
-	AgentId   int      `json:"agentid"`
-	AppId     int      `json:"appid"`
+	AgentId   int64    `json:"agentid"`
+	AppId     int64    `json:"appid"`
 	LogoUrl   string   `json:"logo_url"`
 	AdminList []string `json:"admin_list"`
 }
@@ -56,32 +56,32 @@ type ChannelAuthInfo struct {
 
 type ChannelAgent struct {
 	AgentName string `json:"agent_name"`
-	AgentId   int    `json:"agentid"`
-	AppId     int    `json:"appid"`
-	LogoUrl   int    `json:"logo_url"`
+	AgentId   int64  `json:"agentid"`
+	AppId     int64  `json:"appid"`
+	LogoUrl   int64  `json:"logo_url"`
 }
 
 //======================== 获取授权应用信息: https://open-doc.dingtalk.com/microapp/serverapi3/vfitg0
 type GetAgentResp struct {
 	BaseResp
 
-	AgentId     int    `json:"agentid"`
+	AgentId     int64  `json:"agentid"`
 	Name        string `json:"name"`
 	LogoUrl     string `json:"logo_url"`
 	Description string `json:"description"`
-	Close       int    `json:"close"`
+	Close       int64  `json:"close"`
 }
 
 type GetJsApiTicketResp struct {
 	BaseResp
 
 	Ticket    string `json:"ticket"`
-	ExpiresIn int    `json:"expires_in"`
+	ExpiresIn int64  `json:"expires_in"`
 }
 
 type GetSuiteAccessTokenResp struct {
 	SuiteAccessToken string `json:"suite_access_token"`
-	ExpiresIn        int    `json:"expires_in"`
+	ExpiresIn        int64  `json:"expires_in"`
 }
 
 type GetPermanentCodeResp struct {

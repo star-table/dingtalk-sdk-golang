@@ -25,7 +25,7 @@ type Corp struct {
 
 type DingTalkClient struct {
 	AccessToken string
-	AgentId     int
+	AgentId     int64
 }
 
 func NewSDK() *DingTalkSDK {
@@ -51,7 +51,7 @@ func NewCorp(suiteTicket string, corpId string) *Corp {
 	}
 }
 
-func NewDingTalkClient(accessToken string, agentId int) *DingTalkClient {
+func NewDingTalkClient(accessToken string, agentId int64) *DingTalkClient {
 	return &DingTalkClient{
 		AccessToken: accessToken,
 		AgentId:     agentId,

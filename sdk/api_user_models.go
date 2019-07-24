@@ -32,7 +32,7 @@ type GetAdminListResp struct {
 type GetAdminScopeResp struct {
 	BaseResp
 
-	DeptIds []int `json:"dept_ids"`
+	DeptIds []int64 `json:"dept_ids"`
 }
 
 type CanAccessMicroAppResp struct {
@@ -67,7 +67,7 @@ type UserList struct {
 	IsBoos          bool             `json:"isBoss"`
 	HiredDate       int64            `json:"hiredDate"`
 	IsSenior        bool             `json:"isSenior"`
-	Department      []int            `json:"department"`
+	Department      []int64          `json:"department"`
 	OrderInDepts    string           `json:"orderInDepts"`
 	Active          bool             `json:"active"`
 	Avatar          string           `json:"avatar"`

@@ -13,7 +13,7 @@ func (client *DingTalkClient) SendWorkNotice(userIdList *string, deptIdList *str
 	msgJsonStr, _ := json.ToJson(msg)
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
 		"msg":          encrypt.URLEncode(msgJsonStr),
 	}
 	if userIdList != nil {
@@ -36,11 +36,11 @@ func (client *DingTalkClient) SendWorkNotice(userIdList *string, deptIdList *str
 
 //Desc: 查询工作通知消息的发送进度
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/is3zms#
-func (client *DingTalkClient) GetWorkNoticeProgress(taskId int) (GetWorkNoticeProgressResp, error) {
+func (client *DingTalkClient) GetWorkNoticeProgress(taskId int64) (GetWorkNoticeProgressResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
-		"task_id":      strconv.Itoa(taskId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
+		"task_id":      strconv.FormatInt(taskId, 10),
 	}
 	body, err := http.Post("https://oapi.dingtalk.com/topapi/message/corpconversation/getsendprogress", params, "")
 	resp := GetWorkNoticeProgressResp{}
@@ -53,11 +53,11 @@ func (client *DingTalkClient) GetWorkNoticeProgress(taskId int) (GetWorkNoticePr
 
 //Desc: 查询工作通知消息的发送结果
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/is3zms#
-func (client *DingTalkClient) GetWorkNoticeSendResult(taskId int) (GetWorkNoticeResultResp, error) {
+func (client *DingTalkClient) GetWorkNoticeSendResult(taskId int64) (GetWorkNoticeResultResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
-		"task_id":      strconv.Itoa(taskId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
+		"task_id":      strconv.FormatInt(taskId, 10),
 	}
 	body, err := http.Post("https://oapi.dingtalk.com/topapi/message/corpconversation/getsendresult", params, "")
 	resp := GetWorkNoticeResultResp{}
@@ -70,11 +70,11 @@ func (client *DingTalkClient) GetWorkNoticeSendResult(taskId int) (GetWorkNotice
 
 //Desc: 工作通知消息撤回
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/is3zms#
-func (client *DingTalkClient) RecallWorkNotice(taskId int) (WorkNoticeRecallResp, error) {
+func (client *DingTalkClient) RecallWorkNotice(taskId int64) (WorkNoticeRecallResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
-		"msg_task_id":  strconv.Itoa(taskId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
+		"msg_task_id":  strconv.FormatInt(taskId, 10),
 	}
 	body, err := http.Post("https://oapi.dingtalk.com/topapi/message/corpconversation/recall", params, "")
 	resp := WorkNoticeRecallResp{}
