@@ -9,7 +9,7 @@ type SaveProcessResp struct {
 
 type SaveProcessReq struct {
 	ProcessCode       *string           `json:"process_code"`
-	AgentId           int               `json:"agentid"`
+	AgentId           int64             `json:"agentid"`
 	DisableFormEdit   *string           `json:"disable_form_edit"`
 	Name              string            `json:"name"`
 	Description       string            `json:"description"`
@@ -55,10 +55,10 @@ type FormConditionListResp struct {
 }
 
 type CreateProcessInstanceReq struct {
-	AgentId             *int                         `json:"agent_id"`
+	AgentId             *int64                       `json:"agent_id"`
 	ProcessCode         string                       `json:"process_code"`
 	OriginatorUserId    string                       `json:"originator_user_id"`
-	DeptId              int                          `json:"dept_id"`
+	DeptId              int64                        `json:"dept_id"`
 	Approvers           string                       `json:"approvers"`
 	ApproversV2         *[]ProcessInstanceApproverVo `json:"approvers_v2"`
 	CcList              *string                      `json:"cc_list"`
@@ -85,7 +85,7 @@ type CreateProcessInstanceResp struct {
 type GetCspaceInfoResp struct {
 	BaseResp
 	Result struct {
-		SpaceId int `json:"space_id"`
+		SpaceId int64 `json:"space_id"`
 	} `json:"result"`
 	Success bool `json:"success"`
 }

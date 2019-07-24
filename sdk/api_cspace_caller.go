@@ -18,7 +18,7 @@ func (client *DingTalkClient) FileUploadSingle(path string) (*FileUploadSingleRe
 	}
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
 		"file_size":    strconv.FormatInt(fileInfo.Size(), 10),
 	}
 	body, err := http.PostFile("https://oapi.dingtalk.com/file/upload/single", params, path, "media")
@@ -35,7 +35,7 @@ func (client *DingTalkClient) FileUploadSingle(path string) (*FileUploadSingleRe
 func (client *DingTalkClient) BeginUploadTransaction(size int64, count int) (*BeginUploadTransaction, error) {
 	params := map[string]string{
 		"access_token":  client.AccessToken,
-		"agent_id":      strconv.Itoa(client.AgentId),
+		"agent_id":      strconv.FormatInt(client.AgentId, 10),
 		"file_size":     strconv.FormatInt(size, 10),
 		"chunk_numbers": strconv.Itoa(count),
 	}
@@ -53,7 +53,7 @@ func (client *DingTalkClient) BeginUploadTransaction(size int64, count int) (*Be
 func (client *DingTalkClient) BeginUploadChunk(uploadId string, sequence int, reader io.Reader) (*BaseResp, error) {
 	params := map[string]string{
 		"access_token":   client.AccessToken,
-		"agent_id":       strconv.Itoa(client.AgentId),
+		"agent_id":       strconv.FormatInt(client.AgentId, 10),
 		"upload_id":      uploadId,
 		"chunk_sequence": strconv.Itoa(sequence),
 	}
@@ -72,7 +72,7 @@ func (client *DingTalkClient) BeginUploadChunk(uploadId string, sequence int, re
 func (client *DingTalkClient) CommitUploadTransaction(size int64, count int, uploadId string) (*CommitUploadTransaction, error) {
 	params := map[string]string{
 		"access_token":  client.AccessToken,
-		"agent_id":      strconv.Itoa(client.AgentId),
+		"agent_id":      strconv.FormatInt(client.AgentId, 10),
 		"upload_id":     uploadId,
 		"file_size":     strconv.FormatInt(size, 10),
 		"chunk_numbers": strconv.Itoa(count),
@@ -92,7 +92,7 @@ func (client *DingTalkClient) CommitUploadTransaction(size int64, count int, upl
 func (client *DingTalkClient) SendDingPanFileToSingleChat(userId string, mediaId string, fileName string) (*BaseResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
 		"userid":       userId,
 		"media_id":     mediaId,
 		"file_name":    fileName,
@@ -111,7 +111,7 @@ func (client *DingTalkClient) SendDingPanFileToSingleChat(userId string, mediaId
 func (client *DingTalkClient) AddFileToUserCSpace(code string, mediaId string, spaceId string, folderId string, name string, overwrite bool) (*AddFileToUserCSpaceResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"agent_id":     strconv.Itoa(client.AgentId),
+		"agent_id":     strconv.FormatInt(client.AgentId, 10),
 		"code":         code,
 		"media_id":     mediaId,
 		"space_id":     spaceId,
@@ -135,7 +135,7 @@ func (client *DingTalkClient) GetCustomSpace(domain string) (*GetCustomSpaceResp
 		"access_token": client.AccessToken,
 	}
 	if client.AgentId != 0 {
-		params["agent_id"] = strconv.Itoa(client.AgentId)
+		params["agent_id"] = strconv.FormatInt(client.AgentId, 10)
 	}
 	if domain != "" {
 		params["domain"] = domain
@@ -168,7 +168,7 @@ func (client *DingTalkClient) GrantCustomSpace(domain string, grantType string, 
 		params["fileIds"] = fileIds
 	}
 	if client.AgentId != 0 {
-		params["agent_id"] = strconv.Itoa(client.AgentId)
+		params["agent_id"] = strconv.FormatInt(client.AgentId, 10)
 	}
 	if domain != "" {
 		params["domain"] = domain

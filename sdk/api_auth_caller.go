@@ -10,7 +10,7 @@ import (
 
 //CorpAuth is the common signature methods for multiple authentication interfaces
 //Get a common interface for enterprise authentication information
-func CorpAuth(url string, suiteKey string, suiteSecret string, suiteTicket string, authCorpId string, agentId int) (string, error) {
+func CorpAuth(url string, suiteKey string, suiteSecret string, suiteTicket string, authCorpId string, agentId int64) (string, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10) + "\n" + suiteTicket
 
@@ -29,7 +29,7 @@ func CorpAuth(url string, suiteKey string, suiteSecret string, suiteTicket strin
 		"auth_corpid": authCorpId,
 	}
 	if agentId != 0 {
-		bodyParams["agentid"] = strconv.Itoa(agentId)
+		bodyParams["agentid"] = strconv.FormatInt(agentId, 10)
 		bodyParams["suite_key"] = suiteKey
 	}
 
@@ -64,7 +64,7 @@ func (corp *Corp) GetAuthInfo() (GetAuthInfoResp, error) {
 
 //Desc: 获取授权应用信息
 //Doc: https://open-doc.dingtalk.com/microapp/serverapi3/vfitg0
-func (corp *Corp) GetAgent(agentId int) (GetAgentResp, error) {
+func (corp *Corp) GetAgent(agentId int64) (GetAgentResp, error) {
 	body, err := CorpAuth("https://oapi.dingtalk.com/service/get_agent", corp.SuiteKey, corp.SuiteSecret, corp.SuiteTicket, corp.CorpId, agentId)
 	resp := GetAgentResp{}
 	if err != nil {

@@ -1,8 +1,7 @@
 package sdk
 
 type WorkNoticeRecallResp struct {
-	ErrCode int    `json:"errcode"`
-	ErrMsg  string `json:"errmsg"`
+	BaseResp
 }
 
 type WorkNoticeMsg struct {
@@ -18,26 +17,26 @@ type WorkNoticeMsg struct {
 }
 
 type SendWorkNoticeResp struct {
-	ErrCode int    `json:"errcode"`
-	ErrMsg  string `json:"errmsg"`
-	TaskId  int    `json:"task_id"`
+	BaseResp
+
+	TaskId int64 `json:"task_id"`
 }
 
 type GetWorkNoticeProgressResp struct {
-	ErrCode  int            `json:"errcode"`
-	ErrMsg   string         `json:"errmsg"`
+	BaseResp
+
 	Progress NoticeProgress `json:"progress"`
 }
 
 type GetWorkNoticeResultResp struct {
-	ErrCode    int              `json:"errcode"`
-	ErrMsg     string           `json:"errmsg"`
+	BaseResp
+
 	SendResult NoticeSendResult `json:"send_result"`
 }
 
 type SendNormalNoticeResp struct {
-	ErrCode  int    `json:"errcode"`
-	ErrMsg   string `json:"errmsg"`
+	BaseResp
+
 	Receiver string `json:"receiver"`
 }
 
@@ -51,8 +50,8 @@ type NoticeSendResult struct {
 }
 
 type NoticeProgress struct {
-	ProgressInPercent int `json:"progress_in_percent"`
-	Status            int `json:"status"`
+	ProgressInPercent int64 `json:"progress_in_percent"`
+	Status            int64 `json:"status"`
 }
 
 type TextNotice struct {
@@ -120,7 +119,7 @@ type ActionCardNotice struct {
 	Markdown       string                   `json:"markdown"`
 	SingleTitle    string                   `json:"single_title"`
 	SingleUrl      string                   `json:"single_url"`
-	BtnOrientation int                      `json:"btn_orientation"`
+	BtnOrientation int64                    `json:"btn_orientation"`
 	BtnJsonList    *[]ActionCardBtnJsonList `json:"btn_json_list"`
 }
 
