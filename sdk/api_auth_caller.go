@@ -90,6 +90,72 @@ func (client *DingTalkClient) GetJsApiTicket(authType string) (*GetJsApiTicketRe
 	return &resp, err
 }
 
+func (s *DingTalkSDK) GetSuiteToken(suiteTicket string) (*GetSuiteAccessTokenResp, error) {
+	params := map[string]string{
+		"suite_key":    s.SuiteKey,
+		"suite_secret": s.SuiteSecret,
+		"suiteTicket":  suiteTicket,
+	}
+
+	jsonStr, err := json.ToJson(params)
+	if err != nil {
+		return nil, err
+	}
+	body, err := http.Post("https://oapi.dingtalk.com/service/get_suite_token", nil, jsonStr)
+	resp := GetSuiteAccessTokenResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+func (s *DingTalkSDK) GetPermanentCode(suiteAccessToken string, tmpAuthCode string) (*GetPermanentCodeResp, error) {
+	params := map[string]string{
+		"suite_access_token": suiteAccessToken,
+	}
+
+	bodyParams := map[string]string{
+		"tmp_auth_code": tmpAuthCode,
+	}
+
+	jsonStr, err := json.ToJson(bodyParams)
+	if err != nil {
+		return nil, err
+	}
+	body, err := http.Post("https://oapi.dingtalk.com/service/get_permanent_code", params, jsonStr)
+	resp := GetPermanentCodeResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
+func (s *DingTalkSDK) ActivateSuite(suiteAccessToken string, authCorpId string, permanentCode string) (*BaseResp, error) {
+	params := map[string]string{
+		"suite_access_token": suiteAccessToken,
+	}
+
+	bodyParams := map[string]string{
+		"suite_key":      s.SuiteKey,
+		"auth_corpid":    authCorpId,
+		"permanent_code": permanentCode,
+	}
+
+	jsonStr, err := json.ToJson(bodyParams)
+	if err != nil {
+		return nil, err
+	}
+	body, err := http.Post("https://oapi.dingtalk.com/service/activate_suite", params, jsonStr)
+	resp := BaseResp{}
+	if err != nil {
+		return nil, err
+	}
+	json.FromJson(body, &resp)
+	return &resp, err
+}
+
 func CalculateJsApiSign(ticket string, nonceStr string, timestamp int64, url string) string {
 	plain := "jsapi_ticket=" + ticket + "&noncestr=" + nonceStr + "&timestamp=" + strconv.FormatInt(timestamp, 10) + "&url=" + url
 	return encrypt.SHA1(plain)

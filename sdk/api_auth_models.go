@@ -78,3 +78,13 @@ type GetJsApiTicketResp struct {
 	Ticket    string `json:"ticket"`
 	ExpiresIn int    `json:"expires_in"`
 }
+
+type GetSuiteAccessTokenResp struct {
+	SuiteAccessToken string `json:"suite_access_token"`
+	ExpiresIn        int    `json:"expires_in"`
+}
+
+type GetPermanentCodeResp struct {
+	PermanentCode string       `json:"permanent_code"`
+	AuthCorpInfo  AuthCorpInfo `json:"auth_corp_info"`
+}
