@@ -11,8 +11,9 @@ import (
 type DingTalkSDK struct {
 	SuiteKey    string
 	SuiteSecret string
-	Token 		string
-	AesKey 		string
+	Token       string
+	AesKey      string
+	AppId       int64
 }
 
 type Corp struct {
@@ -28,11 +29,16 @@ type DingTalkClient struct {
 }
 
 func NewSDK() *DingTalkSDK {
+	appId, err := strconv.ParseInt(os.Getenv("APP_ID"), 10, 64)
+	if err != nil {
+		panic(err)
+	}
 	return &DingTalkSDK{
-		SuiteKey:    	os.Getenv("SUITE_KEY"),
-		SuiteSecret: 	os.Getenv("SUITE_SECRET"),
-		Token: 			os.Getenv("SUITE_TOKEN"),
-		AesKey: 		os.Getenv("SUITE_AES_KEY"),
+		SuiteKey:    os.Getenv("SUITE_KEY"),
+		SuiteSecret: os.Getenv("SUITE_SECRET"),
+		Token:       os.Getenv("SUITE_TOKEN"),
+		AesKey:      os.Getenv("SUITE_AES_KEY"),
+		AppId:       appId,
 	}
 }
 
@@ -52,24 +58,24 @@ func NewDingTalkClient(accessToken string, agentId int) *DingTalkClient {
 	}
 }
 
-func (s *DingTalkSDK) CreateCrypto() *Crypto{
-	if s.SuiteKey == ""{
+func (s *DingTalkSDK) CreateCrypto() *Crypto {
+	if s.SuiteKey == "" {
 		panic("SUITE_KEY is not config in env!")
 	}
-	if s.Token == ""{
+	if s.Token == "" {
 		panic("SUITE_TOKEN is not config in env!")
 	}
-	if s.AesKey == ""{
+	if s.AesKey == "" {
 		panic("SUITE_AES_KEY is not config in env!")
 	}
 	return NewCrypto(s.Token, s.AesKey, s.SuiteKey)
 }
 
-func (s *DingTalkSDK) CreateCorp(corpId string, suiteTicket string) *Corp{
-	if s.SuiteKey == ""{
+func (s *DingTalkSDK) CreateCorp(corpId string, suiteTicket string) *Corp {
+	if s.SuiteKey == "" {
 		panic("SUITE_KEY is not config in env!")
 	}
-	if s.SuiteSecret == ""{
+	if s.SuiteSecret == "" {
 		panic("SUITE_SECRET is not config in env!")
 	}
 	return &Corp{
