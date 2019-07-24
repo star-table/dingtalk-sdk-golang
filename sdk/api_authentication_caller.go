@@ -3,7 +3,6 @@ package sdk
 import (
 	"github.com/polaris-team/dingtalk-sdk-golang/http"
 	"github.com/polaris-team/dingtalk-sdk-golang/json"
-	"strconv"
 )
 
 //第三方企业应用免登(获取用户userid)
@@ -47,8 +46,8 @@ func (s *DingTalkSDK) GetUserInfoByCode(code string) (GetUserInfoByCodeResp, err
 		"tmp_auth_code": code,
 	}
 	paramsJson, _ := json.ToJson(params)
-
-	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", strconv.FormatInt(s.AppId, 10), s.SuiteSecret, "", "", paramsJson)
+	
+	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", s.SuiteKey, s.SuiteSecret, "_", "", paramsJson)
 	resp := GetUserInfoByCodeResp{}
 	if err != nil {
 		return resp, err
