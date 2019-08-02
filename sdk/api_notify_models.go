@@ -90,13 +90,13 @@ type OANoticeHead struct {
 }
 
 type OANoticeBody struct {
-	Title     string             `json:"title"`
-	Form      []OANoticeBodyForm `json:"form"`
-	Rich      OANoticeBodyRich   `json:"rich"`
-	Content   string             `json:"content"`
-	Image     string             `json:"image"`
-	FileCount string             `json:"file_count"`
-	Author    string             `json:"author"`
+	Title     *string             `json:"title"`
+	Form      *[]OANoticeBodyForm `json:"form"`
+	Rich      *OANoticeBodyRich   `json:"rich"`
+	Content   *string             `json:"content"`
+	Image     *string             `json:"image"`
+	FileCount *string             `json:"file_count"`
+	Author    *string             `json:"author"`
 }
 
 type OANoticeBodyForm struct {
