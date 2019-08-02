@@ -117,9 +117,9 @@ type MarkdownNotice struct {
 type ActionCardNotice struct {
 	Title          string                   `json:"title"`
 	Markdown       string                   `json:"markdown"`
-	SingleTitle    string                   `json:"single_title"`
-	SingleUrl      string                   `json:"single_url"`
-	BtnOrientation int64                    `json:"btn_orientation"`
+	SingleTitle    *string                  `json:"single_title"`
+	SingleUrl      *string                  `json:"single_url"`
+	BtnOrientation *int64                   `json:"btn_orientation"`
 	BtnJsonList    *[]ActionCardBtnJsonList `json:"btn_json_list"`
 }
 
