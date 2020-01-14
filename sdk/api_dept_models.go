@@ -7,13 +7,15 @@ type GetSubdeptResp struct {
 
 type GetDeptListResp struct {
 	BaseResp
-	Department []struct {
-		Id              int64  `json:"id"`
-		Name            string `json:"name"`
-		ParentId        int64  `json:"parentid"`
-		CreateDeptGroup bool   `json:"createDeptGroup"`
-		AutoAddUser     bool   `json:"autoAddUser"`
-	} `json:"department"`
+	Department []DepartmentInfo `json:"department"`
+}
+
+type DepartmentInfo struct {
+	Id              int64  `json:"id"`
+	Name            string `json:"name"`
+	ParentId        int64  `json:"parentid"`
+	CreateDeptGroup bool   `json:"createDeptGroup"`
+	AutoAddUser     bool   `json:"autoAddUser"`
 }
 
 type GetDeptDetailResp struct {

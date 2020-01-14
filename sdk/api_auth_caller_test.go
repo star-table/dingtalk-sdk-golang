@@ -9,9 +9,9 @@ import (
 
 //Create Corp just for test
 func CreateCorp() *Corp {
-	os.Setenv("SUITE_KEY", "xxx")
-	os.Setenv("SUITE_SECRET", "xxx")
-	return NewCorp("xxx", "xxx")
+	os.Setenv("SUITE_KEY", "suiteocpiljyoalvbhrbi")
+	os.Setenv("SUITE_SECRET", "d1XKtyVpocDrOVJrDqPfqysmLGX7pinWS7iA8l5T7OWPd8aWZWNRfXEJrHoyb5Ng")
+	return NewCorp("xxx", "ding79b4e083c47d2808f2c783f7214b6d69")
 }
 
 //Create Client just for test
