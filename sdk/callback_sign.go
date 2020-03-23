@@ -1,31 +1,33 @@
 package sdk
 
 import (
-"bytes"
-"crypto/aes"
-"crypto/cipher"
-"crypto/rand"
-"crypto/sha1"
-"encoding/base64"
-"encoding/binary"
-"errors"
-"fmt"
-r "math/rand"
-"sort"
-"time"
+	"bytes"
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/rand"
+	"crypto/sha1"
+	"encoding/base64"
+	"encoding/binary"
+	"errors"
+	"fmt"
+	r "math/rand"
+	"sort"
+	"time"
 )
 
 var DefaultDingtalkCrypto *Crypto
+
 const (
 	AES_ENCODE_KEY_LENGTH = 43
 )
 
 //Base64解密
-func Ddbase64sign(key string)(bt []byte,err error){
+func Ddbase64sign(key string) (bt []byte, err error) {
 	return base64.StdEncoding.DecodeString(key)
 }
 
 type Crypto struct {
+	CropId   string
 	Token    string
 	AesKey   string
 	SuiteKey string
@@ -40,6 +42,7 @@ type Crypto struct {
 */
 func NewCrypto(token, aesKey, suiteKey string) (c *Crypto) {
 	c = &Crypto{
+		CropId:   suiteKey,
 		Token:    token,
 		AesKey:   aesKey,
 		SuiteKey: suiteKey,
@@ -84,9 +87,8 @@ func (c *Crypto) DecryptMsg(signature, timeStamp, nonce, secretStr string) (stri
 	size := binary.BigEndian.Uint32(plantText[16 : 16+4])
 	plantText = plantText[16+4:]
 	cropid := plantText[size:]
-	if string(cropid) != c.SuiteKey {
-		return "", errors.New("CropID不正确")
-	}
+	c.CropId = string(cropid)
+
 	return string(plantText[:size]), nil
 }
 
@@ -106,7 +108,7 @@ func (c *Crypto) EncryptMsg(replyMsg, timeStamp, nonce string) (string, string, 
 	//原生消息体长度
 	size := make([]byte, 4)
 	binary.BigEndian.PutUint32(size, uint32(len(replyMsg)))
-	replyMsg = c.RandomString(16) + string(size) + replyMsg + c.SuiteKey
+	replyMsg = c.RandomString(16) + string(size) + replyMsg + c.CropId
 	plantText := PKCS7Padding([]byte(replyMsg), c.block.BlockSize())
 	if len(plantText)%aes.BlockSize != 0 {
 		return "", "", errors.New("消息体大小不为16的倍数")
