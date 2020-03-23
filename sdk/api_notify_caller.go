@@ -1,9 +1,9 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/encrypt"
-	"github.com/polaris-team/dingtalk-sdk-golang/http"
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
+	"github.com/flyingtime/dingtalk-sdk-golang/encrypt"
+	"github.com/flyingtime/dingtalk-sdk-golang/http"
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 	"strconv"
 )
 

@@ -1,6 +1,6 @@
-module github.com/polaris-team/dingtalk-sdk-golang
+module github.com/flyingtime/dingtalk-sdk-golang
 
-go 1.12
+go 1.14
 
 require (
 	github.com/json-iterator/go v1.1.6
