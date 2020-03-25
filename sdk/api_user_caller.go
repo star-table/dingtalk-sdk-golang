@@ -1,9 +1,10 @@
 package sdk
 
 import (
+	"strconv"
+
 	"github.com/flyingtime/dingtalk-sdk-golang/http"
 	"github.com/flyingtime/dingtalk-sdk-golang/json"
-	"strconv"
 )
 
 //Desc: 获取用户详情

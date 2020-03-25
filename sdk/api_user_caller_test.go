@@ -1,8 +1,9 @@
 package sdk
 
 import (
-	"github.com/flyingtime/dingtalk-sdk-golang/json"
 	"testing"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 func TestGetDepMember(t *testing.T) {

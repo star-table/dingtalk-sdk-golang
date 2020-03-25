@@ -5,10 +5,12 @@ DingDing Documents: [https://open-doc.dingtalk.com/microapp/serverapi3](https://
 # Features
 Partial feature structure and completion:
  - [x] 应用授权
+   - [x] 获取token
    - [x] 获取企业凭证
    - [x] 获取企业授权信息
    - [x] 获取授权应用信息
    - [x] 获取jsapi_ticket
+   - [x] sign后端生成
  - [x] 身份验证
    - [x] 获取用户userid(第三方企业应用免登)
    - [x] 获取应用管理员的身份信息(应用管理后台免登)

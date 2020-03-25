@@ -2,6 +2,7 @@ package sdk
 
 import (
 	"fmt"
+
 	"github.com/flyingtime/dingtalk-sdk-golang/encrypt"
 	"github.com/flyingtime/dingtalk-sdk-golang/http"
 	"github.com/flyingtime/dingtalk-sdk-golang/json"

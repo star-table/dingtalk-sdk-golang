@@ -1,10 +1,11 @@
 package sdk
 
 import (
-	"github.com/flyingtime/dingtalk-sdk-golang/json"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 //Create Corp just for test
