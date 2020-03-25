@@ -108,7 +108,7 @@ func (c *Crypto) EncryptMsg(replyMsg, timeStamp, nonce string) (string, string, 
 	//原生消息体长度
 	size := make([]byte, 4)
 	binary.BigEndian.PutUint32(size, uint32(len(replyMsg)))
-	replyMsg = c.RandomString(16) + string(size) + replyMsg + c.CropId
+	replyMsg = RandomString(16) + string(size) + replyMsg + c.CropId
 	plantText := PKCS7Padding([]byte(replyMsg), c.block.BlockSize())
 	if len(plantText)%aes.BlockSize != 0 {
 		return "", "", errors.New("消息体大小不为16的倍数")
@@ -145,7 +145,7 @@ func (c *Crypto) VerifySignature(token, timeStamp, nonce, secretStr, sigture str
 	return c.GenerateSignature(token, timeStamp, nonce, secretStr) == sigture
 }
 
-func (c *Crypto) RandomString(n int, alphabets ...byte) string {
+func RandomString(n int, alphabets ...byte) string {
 	const alphanum = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 	var bytes = make([]byte, n)
 	var randby bool
@@ -168,6 +168,7 @@ func (c *Crypto) RandomString(n int, alphabets ...byte) string {
 			}
 		}
 	}
+
 	return string(bytes)
 }
 
