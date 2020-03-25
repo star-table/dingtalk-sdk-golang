@@ -1,12 +1,13 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/encrypt"
-	"github.com/polaris-team/dingtalk-sdk-golang/file"
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/encrypt"
+	"github.com/flyingtime/dingtalk-sdk-golang/file"
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 func TestDingTalkClient_FileUploadSingle(t *testing.T) {

@@ -1,8 +1,9 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"testing"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 func TestGetSubDept(t *testing.T) {

@@ -1,8 +1,8 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/http"
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
+	"github.com/flyingtime/dingtalk-sdk-golang/http"
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 //获取子部门ID列表

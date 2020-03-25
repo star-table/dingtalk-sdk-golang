@@ -1,9 +1,10 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"strings"
 	"testing"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 func GetTestInfo() (string, *DingTalkClient) {

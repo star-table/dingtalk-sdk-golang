@@ -1,9 +1,10 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/http"
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"strconv"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/http"
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 //Desc: 获取角色列表

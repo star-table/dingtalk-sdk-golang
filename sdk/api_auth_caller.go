@@ -1,11 +1,12 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/encrypt"
-	"github.com/polaris-team/dingtalk-sdk-golang/http"
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"strconv"
 	"time"
+
+	"github.com/flyingtime/dingtalk-sdk-golang/encrypt"
+	"github.com/flyingtime/dingtalk-sdk-golang/http"
+	"github.com/flyingtime/dingtalk-sdk-golang/json"
 )
 
 //CorpAuth is the common signature methods for multiple authentication interfaces
@@ -35,6 +36,46 @@ func CorpAuth(url string, suiteKey string, suiteSecret string, suiteTicket strin
 
 	body, _ := json.ToJson(bodyParams)
 	return http.Post(url, params, body)
+}
+
+// sso是否获取管理后台免登陆token
+// sso = ture;appkey为管理后台免登陆的企业corpId,appsecret为该企业的SSOsecret
+// sso = false;appkey,appsecret为应用的信息
+func GetToken(appkey, appsecret string, sso bool) (string, error) {
+	type AcessTokenResp struct {
+		BaseResp
+		AcessToken string `json:"access_token"`
+	}
+
+	var body string
+	var err error
+
+	if sso {
+		params := map[string]string{
+			"corpid":     appkey,
+			"corpsecret": appsecret,
+		}
+
+		body, err = http.Get("https://oapi.dingtalk.com/sso/gettoken", params)
+		if err != nil {
+			return "", err
+		}
+	} else {
+		params := map[string]string{
+			"appkey":    appkey,
+			"appsecret": appsecret,
+		}
+
+		body, err = http.Get("https://oapi.dingtalk.com/gettoken", params)
+		if err != nil {
+			return "", err
+		}
+	}
+
+	resp := AcessTokenResp{}
+	json.FromJson(body, &resp)
+
+	return resp.AcessToken, nil
 }
 
 //GetCorpToken can get corporation's token
