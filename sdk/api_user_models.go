@@ -62,6 +62,8 @@ type AdminList struct {
 type UserList struct {
 	Name            string           `json:"name"`
 	UnionId         string           `json:"unionid"`
+	Mobile          string           `json:"mobile"`
+	WorkPlace       string           `json:"workPlace"`
 	UserId          string           `json:"userid"`
 	IsLeaderInDepts string           `json:"isLeaderInDepts"`
 	IsBoos          bool             `json:"isBoss"`
@@ -75,7 +77,7 @@ type UserList struct {
 	IsHide          bool             `json:"isHide"`
 	JobNumber       string           `json:"jobnumber"`
 	Position        string           `json:"position"`
-	DingId          string           `json:"dingId"`
+	StateCode       string           `json:"stateCode"`
 	Roles           []UserDetailRole `json:"roles"`
 }
 
