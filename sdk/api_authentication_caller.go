@@ -48,7 +48,7 @@ func (s *DingTalkSDK) GetUserInfoByCode(code string) (*GetUserInfoByCodeResp, er
 	}
 	paramsJson, _ := json.ToJson(params)
 
-	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", s.SuiteKey, s.SuiteSecret, "_", "", paramsJson)
+	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", s.SuiteKey, s.SuiteSecret, "", "", paramsJson)
 	resp := &GetUserInfoByCodeResp{}
 	if err != nil {
 		return nil, err
