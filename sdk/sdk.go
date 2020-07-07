@@ -28,6 +28,18 @@ type DingTalkClient struct {
 	AgentId     int64
 }
 
+type DingTalkOauthClient struct {
+	OauthAppId     string
+	OauthAppSecret string
+}
+
+func NewDingTalkOauthClient() *DingTalkOauthClient {
+	return &DingTalkOauthClient{
+		OauthAppId:     os.Getenv("OAUTH_APP_ID"),
+		OauthAppSecret: os.Getenv("OAUTH_APP_SECRET"),
+	}
+}
+
 func NewSDK() *DingTalkSDK {
 	appId, err := strconv.ParseInt(os.Getenv("APP_ID"), 10, 64)
 	if err != nil {
@@ -98,27 +110,20 @@ func (corp *Corp) CreateDingTalkClient() (*DingTalkClient, error) {
 	return NewDingTalkClient(tokenInfo.AccessToken, authInfo.AuthInfo.Agent[0].AgentId), nil
 }
 
-func ExcuteOapi(url string, accessKey string, accessSecret string, suiteTicket string, corpId string, body string) (string, error) {
+func ExcuteOapi(url string, oauthAppId string, oauthAppSecret string, body string) (string, error) {
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10)
-	if suiteTicket != "" {
-		nativeSignature += "\n" + suiteTicket
-	}
 
-	afterHmacSHA256 := encrypt.SHA256(nativeSignature, accessSecret)
+	oauthAppId = "dingoayheivmu34mylzrzg"
+	oauthAppSecret = "PeQfl0uBtO3VLr-Feix5cIEWM9Oo81Mhec-SRiO2SPiEPU18fg0YZaB7fHXVkX3U"
+	afterHmacSHA256 := encrypt.SHA256(nativeSignature, oauthAppSecret)
 	afterBase64 := encrypt.BASE64(afterHmacSHA256)
 	afterUrlEncode := encrypt.URLEncode(afterBase64)
 
 	params := map[string]string{
 		"timestamp": strconv.FormatInt(timestamp, 10),
-		"accessKey": accessKey,
+		"accessKey": oauthAppId,
 		"signature": afterUrlEncode,
-	}
-	if suiteTicket != "" {
-		params["suiteTicket"] = suiteTicket
-	}
-	if corpId != "" {
-		params["corpId"] = corpId
 	}
 
 	return http.Post(url, params, body)

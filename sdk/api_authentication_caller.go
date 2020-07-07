@@ -41,13 +41,13 @@ func (client *DingTalkClient) GetUserInfoFromAdmin(code string) (GetUserInfoFrom
 
 //服务端通过临时授权码获取授权用户的个人信息
 //https://open-doc.dingtalk.com/microapp/serverapi3/vmzkak
-func (s *DingTalkSDK) GetUserInfoByCode(code string) (GetUserInfoByCodeResp, error) {
+func (client *DingTalkOauthClient) GetUserInfoByCode(code string) (GetUserInfoByCodeResp, error) {
 	params := map[string]string{
 		"tmp_auth_code": code,
 	}
 	paramsJson, _ := json.ToJson(params)
-	
-	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", s.SuiteKey, s.SuiteSecret, "_", "", paramsJson)
+
+	body, err := ExcuteOapi("https://oapi.dingtalk.com/sns/getuserinfo_bycode", client.OauthAppId, client.OauthAppSecret, paramsJson)
 	resp := GetUserInfoByCodeResp{}
 	if err != nil {
 		return resp, err

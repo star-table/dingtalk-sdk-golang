@@ -16,3 +16,9 @@ func TestGetUserInfoFromAdmin(t *testing.T) {
 	t.Log(json.ToJson(resp))
 	t.Log(err)
 }
+
+func TestDingTalkSDK_GetUserInfoByCode(t *testing.T) {
+	resp, err := NewDingTalkOauthClient().GetUserInfoByCode("492b19afde343b559cc53f9b096adfe1")
+	t.Log(json.ToJson(resp))
+	t.Log(err)
+}
