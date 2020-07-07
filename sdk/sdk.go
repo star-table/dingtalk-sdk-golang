@@ -114,8 +114,6 @@ func ExcuteOapi(url string, oauthAppId string, oauthAppSecret string, body strin
 	timestamp := time.Now().UnixNano() / 1e6
 	nativeSignature := strconv.FormatInt(timestamp, 10)
 
-	oauthAppId = "dingoayheivmu34mylzrzg"
-	oauthAppSecret = "PeQfl0uBtO3VLr-Feix5cIEWM9Oo81Mhec-SRiO2SPiEPU18fg0YZaB7fHXVkX3U"
 	afterHmacSHA256 := encrypt.SHA256(nativeSignature, oauthAppSecret)
 	afterBase64 := encrypt.BASE64(afterHmacSHA256)
 	afterUrlEncode := encrypt.URLEncode(afterBase64)
