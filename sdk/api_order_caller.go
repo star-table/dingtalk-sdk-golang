@@ -79,9 +79,9 @@ func (client *DingTalkClient) OrderConsume(orderId int64, requestId string, quan
 
 //获取未处理的已支付订单
 //doc:https://ding-doc.dingtalk.com/doc#/serverapi3/lg1nb7/2abS0
-func (client *DingTalkClient) GetUnfinishOrderList(itemCode string, page int64, size int64) (GetUnfinishOrderListResp, error) {
+func (s *DingTalkSDK) GetUnfinishOrderList(suiteAccessToken string, itemCode string, page int64, size int64) (GetUnfinishOrderListResp, error) {
 	params := map[string]string{
-		"access_token": client.AccessToken,
+		"access_token": suiteAccessToken,
 		"page":         strconv.FormatInt(page, 10),
 		"page_size":    strconv.FormatInt(size, 10),
 	}

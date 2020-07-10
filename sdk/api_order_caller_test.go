@@ -1,7 +1,6 @@
 package sdk
 
 import (
-	"github.com/polaris-team/dingtalk-sdk-golang/json"
 	"testing"
 )
 
@@ -31,11 +30,4 @@ func TestDingTalkClient_OrderConsume(t *testing.T) {
 	res, err := client.OrderConsume(50010505110088, "1199291922", 1, "12")
 	t.Log(err)
 	t.Log(res)
-}
-
-func TestDingTalkClient_GetUnfinishOrderList(t *testing.T) {
-	client := CreateClient()
-	res, err := client.GetUnfinishOrderList("", 1, 10)
-	t.Log(err)
-	t.Log(json.ToJson(res))
 }
