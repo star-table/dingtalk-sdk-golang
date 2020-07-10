@@ -35,7 +35,7 @@ type UnfinishOrderList struct {
 
 type UnfinishOrderInfo struct {
 	BizOrderId        int64  `json:"biz_order_id"`
-	corpId            string `json:"corp_id"`
+	CorpId            string `json:"corp_id"`
 	CreateTimestamp   int64  `json:"create_timestamp"`
 	GoodsCode         string `json:"goods_code"`
 	ItemCode          string `json:"item_code"`
