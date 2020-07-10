@@ -30,7 +30,7 @@ type GetUnfinishOrderListResp struct {
 }
 
 type UnfinishOrderList struct {
-	Items UnfinishOrderInfo `json:"items"`
+	Items []UnfinishOrderInfo `json:"items"`
 }
 
 type UnfinishOrderInfo struct {
