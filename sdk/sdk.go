@@ -1,6 +1,7 @@
 package sdk
 
 import (
+	"errors"
 	"github.com/polaris-team/dingtalk-sdk-golang/encrypt"
 	"github.com/polaris-team/dingtalk-sdk-golang/http"
 	"os"
@@ -106,6 +107,9 @@ func (corp *Corp) CreateDingTalkClient() (*DingTalkClient, error) {
 	authInfo, err := corp.GetAuthInfo()
 	if err != nil {
 		return nil, err
+	}
+	if authInfo.ErrCode > 0 {
+		return nil, errors.New(authInfo.ErrMsg)
 	}
 	return NewDingTalkClient(tokenInfo.AccessToken, authInfo.AuthInfo.Agent[0].AgentId), nil
 }
