@@ -84,3 +84,43 @@ type UserDetailRole struct {
 	Name      string `json:"name"`
 	GroupName string `json:"groupName"`
 }
+
+type GetDeptUserListV2Resp struct {
+	BaseResp
+
+	Result GetDeptUserListV2RespResult `json:"result"`
+}
+
+type GetDeptUserListV2RespResult struct {
+	HasMore    bool               `json:"has_more"`
+	NextCursor int64              `json:"nextCursor"`
+	List       []UserDetailInfoV2 `json:"list"`
+}
+
+type UserDetailInfoV2 struct {
+	UserID               string  `json:"userid"`
+	UnionID              string  `json:"unionid"`
+	Name                 string  `json:"name"`
+	Avatar               string  `json:"avatar"`
+	StateCode            string  `json:"state_code"`
+	Mobile               string  `json:"mobile"`
+	HideMobile           bool    `json:"hide_mobile"`
+	Telephone            string  `json:"telephone"`
+	JobNumber            string  `json:"job_number"`
+	Title                string  `json:"title"`
+	Email                string  `json:"email"`
+	OrgEmail             string  `json:"org_email"`
+	WorkPlace            string  `json:"work_place"`
+	Remark               string  `json:"remark"`
+	DeptIdList           []int64 `json:"dept_id_list"`
+	DeptOrder            int64   `json:"dept_order"`
+	Extension            string  `json:"extension"`
+	HiredDate            int64   `json:"hired_date"`
+	Active               bool    `json:"active"`
+	Admin                bool    `json:"admin"`
+	Boss                 bool    `json:"boss"`
+	Leader               bool    `json:"leader"`
+	ExclusiveAccount     bool    `json:"exclusive_account"`
+	LoginId              string  `json:"login_id"`
+	ExclusiveAccountType string  `json:"exclusive_account_type"`
+}

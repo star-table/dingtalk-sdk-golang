@@ -156,3 +156,30 @@ func (client *DingTalkClient) GetOrgUserCount(onlyActive int) (GetOrgUserCountRe
 	json.FromJson(body, &resp)
 	return resp, err
 }
+
+func (client *DingTalkClient) GetDeptUserListV2(deptId int64, cursor int64, size int, orderField string, containAccessLimit *bool, language string) (GetDeptUserListV2Resp, error) {
+	params := map[string]string{
+		"access_token": client.AccessToken,
+	}
+	reqBody := map[string]interface{}{}
+	reqBody["dept_id"] = deptId
+	reqBody["cursor"] = cursor
+	reqBody["size"] = size
+	if orderField != "" {
+		reqBody["order_field"] = orderField
+	}
+	if containAccessLimit != nil {
+		reqBody["contain_access_limit"] = *containAccessLimit
+	}
+	if language != "" {
+		reqBody["language"] = language
+	}
+	reqBodyJson, _ := json.ToJson(reqBody)
+	body, err := http.Post("https://oapi.dingtalk.com/topapi/v2/user/list", params, reqBodyJson)
+	resp := GetDeptUserListV2Resp{}
+	if err != nil {
+		return resp, err
+	}
+	_ = json.FromJson(body, &resp)
+	return resp, err
+}

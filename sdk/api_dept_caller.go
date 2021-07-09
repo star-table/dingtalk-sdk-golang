@@ -24,16 +24,21 @@ func (client *DingTalkClient) GetSubDept(id string) (GetSubdeptResp, error) {
 
 //获取部门列表
 //https://open-doc.dingtalk.com/microapp/serverapi3/fuqv8x#-1
-func (client *DingTalkClient) GetDeptList(lang *string, fetchChild *bool, id string) (GetDeptListResp, error) {
+func (client *DingTalkClient) GetDeptList(lang *string, fetchChild bool, id string) (GetDeptListResp, error) {
 	params := map[string]string{
 		"access_token": client.AccessToken,
-		"id":           id,
+	}
+	if id != "" {
+		params["id"] = id
 	}
 	if lang != nil {
 		params["lang"] = *lang
 	}
-	if *fetchChild != false {
+
+	if fetchChild {
 		params["fetch_child"] = "true"
+	} else {
+		params["fetch_child"] = "false"
 	}
 
 	body, err := http.Get("https://oapi.dingtalk.com/department/list", params)

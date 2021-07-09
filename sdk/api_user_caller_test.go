@@ -61,3 +61,8 @@ func TestDingTalkClient_GetOrgUserCount(t *testing.T) {
 	resp, _ = CreateClient().GetOrgUserCount(1)
 	t.Log(json.ToJson(resp))
 }
+
+func TestDingTalkClient_GetDeptUserListV2(t *testing.T) {
+	resp, _ := CreateClient().GetDeptUserListV2(1, 0, 10, "", nil, "")
+	t.Log(json.ToJson(resp))
+}

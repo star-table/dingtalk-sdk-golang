@@ -25,6 +25,7 @@ type Corp struct {
 }
 
 type DingTalkClient struct {
+	AccessKey   string
 	AccessToken string
 	AgentId     int64
 }

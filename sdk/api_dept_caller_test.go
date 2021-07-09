@@ -13,7 +13,7 @@ func TestGetSubDept(t *testing.T) {
 
 func TestGetDeptList(t *testing.T) {
 	fetchChild := false
-	resp, err := CreateClient().GetDeptList(nil, &fetchChild, "1")
+	resp, err := CreateClient().GetDeptList(nil, fetchChild, "1")
 	t.Log(json.ToJson(resp))
 	t.Log(err)
 }
