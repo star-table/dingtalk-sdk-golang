@@ -1,4 +1,4 @@
-module github.com/polaris-team/dingtalk-sdk-golang
+module github.com/galaxy-book/dingtalk-sdk-golang
 
 go 1.12
 
